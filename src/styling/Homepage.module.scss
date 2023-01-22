@@ -1,0 +1,18 @@
+.homewrapper{
+    background-color: #FFF3E8;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    padding: 4rem 0rem;
+}
+
+@media screen and (min-width: 800px) {
+   .homewrapper{
+    width: 80%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 5fr 5fr 5fr 5fr;
+    align-items: center;
+   }
+  }
