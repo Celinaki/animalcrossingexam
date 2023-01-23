@@ -12,7 +12,8 @@
     width: 80%;
     margin: auto;
     display: grid;
+    row-gap: 2rem;
     grid-template-columns: 5fr 5fr 5fr 5fr;
-    align-items: center;
+    place-items: center;
    }
   }

@@ -111,18 +111,13 @@ const Villagercard = (thevillager) => {
         if(gender === 'Male'){
         const pronouns = "he";
         return <p>
-            {name} is a specie of {species} and {pronouns}
-              is a bit {personality.toLowerCase()}  
-             .When {name} catches something {pronouns} says {phrase}.
+            {name} is a specie of {species} and {pronouns} is a bit {personality.toLowerCase()}  
+             .When {name} catches something {pronouns} says "{phrase}"".
         </p>
         }
         else  if(gender === "Female"){
         const pronouns = "she";
-        return <p>
-        {name} is a specie of {species} and {pronouns}
-         is a bit {personality.toLowerCase(0)} 
-         .When {name} catches something {pronouns} says {phrase}.
-        </p>
+        return <p>{name} is a specie of {species} and {pronouns} is a bit {personality.toLowerCase(0)}. When {name} catches something {pronouns} says "{phrase}".</p>
         }      
     }
 
@@ -137,13 +132,13 @@ const Villagercard = (thevillager) => {
                 </span>
                 <span>
                 <h2>Birthday: {villager['birthday-string']} </h2>{zodiac(villager['birthday-string'])}</span>
-                    {villagerdescription(
+                   <p>{villagerdescription(
                         villager.name["name-USen"],
                         villager.species,
                         villager["catch-phrase"],
                         villager.personality,
                         villager.gender
-                    )}
+                    )}</p> 
               
             </section>
 

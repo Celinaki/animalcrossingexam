@@ -1,0 +1,15 @@
+.categorieswrap{
+    .listitems{
+        display: flex;
+        width: 50%;
+        margin: auto;
+        list-style: none;
+        justify-content: space-between;
+        padding: 2rem 0rem;
+        font-weight: bolder;
+        flex-wrap: wrap;
+        li{
+            cursor: pointer;
+        }
+    }
+}
