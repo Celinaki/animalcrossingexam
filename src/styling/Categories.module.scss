@@ -1,4 +1,5 @@
 .categorieswrap{
+    width: 100%;
     .listitems{
         display: flex;
         width: 50%;
@@ -7,9 +8,23 @@
         justify-content: space-between;
         padding: 2rem 0rem;
         font-weight: bolder;
-        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+        // flex-wrap: wrap;
         li{
             cursor: pointer;
+            a.active{
+                color: aliceblue;
+           all: unset;               
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 800px){
+    .categorieswrap{
+        .listitems{
+            flex-direction: row;
         }
     }
 }

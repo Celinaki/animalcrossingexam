@@ -1,22 +1,56 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import Filterbtn from '../assets/filter-6535.svg'
 import style from '../styling/Filteringmodal.module.scss'
 
 const Filtering=({filterQuery})=>{
     const [filterActive, setFilterActive] = useState(false)
+
+    const ref = useRef(null)
+    useEffect(()=>{
+        const handleClick = (event) => {
+            if (!ref.current.contains(event.target)) {
+                setFilterActive(false)
+            }
+          };
+          document.addEventListener('click', handleClick);
+          return () => {
+            document.removeEventListener('click', handleClick)}
+    },[filterActive])
+
     return(
-<div className={style.filterwrap}>
+<div className={filterActive ? `${style.filterwrapactive}` : style.filterwrap } ref={ref}>
     <img src={Filterbtn} alt="Filtering button" 
      onClick={()=>{
         setFilterActive(!filterActive);
         // toggleFiltering(filterActive);
      }}
+
+
      />  
-     <div className={filterActive ? `${style.filterlist}${style.filterlistactive}` : style.filterlist }>
+     <div className={filterActive ? `${style.filterlist} ${style.filterlistactive}` : style.filterlist }>
         <h1>Sort by</h1>
-        <h2 onClick={()=>filterQuery('alph')}>Alphabetical order</h2>
-        <h2 onClick={()=>filterQuery('Female')}>Male</h2>
-        <h2 onClick={()=>filterQuery('Male')}>Male</h2>
+        <NavLink to={`/villagers/filters/alph`}
+         style={({isActive})=>({color: isActive ? '#90d6d6' : 'inherit'})}
+         onClick={()=>setFilterActive(false)}
+
+         >
+            <h2>Alphabetical order</h2>
+        </NavLink> 
+        <NavLink to={`/villagers/filters/Female`} 
+        style={({isActive})=>({color: isActive ? '#90d6d6' : 'inherit'})}
+        onClick={()=>setFilterActive(false)}>
+        <h2>Females</h2>
+        </NavLink>
+        <NavLink  to={`/villagers/filters/Male`} 
+        style={({isActive})=>({color: isActive ? '#90d6d6' : 'inherit'})}
+        onClick={()=>setFilterActive(false)}>
+        <h2>Males</h2>
+        </NavLink>
+        <NavLink to={`/villagers`}
+         onClick={()=>setFilterActive(false)}>
+           <h2>Reset</h2> 
+        </NavLink>
 
      </div>
 </div>        

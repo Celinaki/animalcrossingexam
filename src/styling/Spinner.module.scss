@@ -1,0 +1,68 @@
+$spinncolor: #D5D4FF;
+$spinborder:#a2a1e0; 
+
+.spinnerbody{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    left: 2vw;
+    top: 5rem;
+    
+}
+.loadspinner {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .loadspinner div {
+    position: absolute;
+    top: 33px;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: $spinncolor;
+    border: 1px solid $spinborder;
+    animation-timing-function: cubic-bezier(0, 1, 1, 0);
+  }
+  .loadspinner div:nth-child(1) {
+    left: 8px;
+    animation: loadspinner1 0.6s infinite;
+  }
+  .loadspinner div:nth-child(2) {
+    left: 8px;
+    animation: loadspinner2 0.6s infinite;
+  }
+  .loadspinner div:nth-child(3) {
+    left: 32px;
+    animation: loadspinner2 0.6s infinite;
+  }
+  .loadspinner div:nth-child(4) {
+    left: 56px;
+    animation: loadspinner3 0.6s infinite;
+  }
+  @keyframes loadspinner1 {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  @keyframes loadspinner3 {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(0);
+    }
+  }
+  @keyframes loadspinner2 {
+    0% {
+      transform: translate(0, 0);
+    }
+    100% {
+      transform: translate(24px, 0);
+    }
+  }

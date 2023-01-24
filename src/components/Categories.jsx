@@ -1,12 +1,15 @@
 import style from '../styling/Categories.module.scss'
+import { NavLink } from 'react-router-dom';
+
 const Categories = ({onChosenQuery}) => {
 
     return (
         <div className={style.categorieswrap}>
 <ul className={style.listitems}>
-    <li onClick={()=>onChosenQuery('villagers')}>
+   <NavLink to={`/villagers`}>
+     <li onClick={()=>onChosenQuery('villagers')}>
         - VILLAGERS -
-    </li>
+    </li></NavLink>
     <li onClick={()=>onChosenQuery('songs')}>
         - SONGS -
     </li>

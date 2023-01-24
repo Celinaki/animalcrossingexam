@@ -1,17 +1,49 @@
-.filterwrap{
+.filterwrapactive{
+    background-color: rgb(0, 97, 65);
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    padding: 13vh 0rem 0rem 0.5rem;
+    min-height: 100% !important;
+    overflow: visible;
+    z-index: 1;
+    width: 80vw;
+    img{
+        transform: rotate(-180deg);
+    }
+}
+.filterwrap, .filterwrapactive{
+    transition: 200ms;
+
 img{
     width: 2.6rem;
+    transition: 500ms;
+    padding-left: 1rem;
 }
 .filterlist{
     display: none;
+    a{
+        color: initial;
+        text-decoration: none;
+        color: wheat;
+        &:active{
+            color: black;
+        }
+    }
 }
 .filterlistactive{
+    top: 0;
     display: contents;
+    color: wheat;
+
 }    
 }
 
 
 @media screen and (min-width: 800px){
+    .filterwrapactive{
+        width: 15vw;
+    }
     .filterlist{
         display: contents;
     }
