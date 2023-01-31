@@ -128,7 +128,6 @@ const Villagercard = (thevillager) => {
                 <span>
                     <h1>{villager.name["name-USen"]}</h1>
                     {genders(villager.gender)}
-
                 </span>
                 <span>
                 <h2>Birthday: {villager['birthday-string']} </h2>{zodiac(villager['birthday-string'])}</span>

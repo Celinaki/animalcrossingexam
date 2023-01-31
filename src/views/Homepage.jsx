@@ -3,10 +3,12 @@ import Navbar from '../components/Navbar'
 import style from '../styling/Homepage.module.scss'
 import Villagercard from "../components/Villagercard";
 import { getVillagers } from "../api/villagers";
+import { getSongs } from "../api/songs";
 import Categories from "../components/Categories";
 import Filtering from "../modals/Filtering";
 import { useParams } from "react-router-dom";
-import Spinner from '../components/Spinner.jsx'
+import Spinner from '../components/Spinner.jsx';
+import Songcard from "../components/Songcard";
 
 const Home = () => {
 //Todos: Pagination, filtering
@@ -41,63 +43,71 @@ console.log(filterQuery, "detta e filter query")
 
   }
   else return 
-
 }
+
 const [villagerPage, setVillagerPage]= useState(false)
 const [displayedVillagers, setDisplayedVillagers] = useState([])
 const {filterQ} = useParams()
 const {villagers} = useParams()
+//const {songs} = useParams()
+
+// useEffect(()=>{
+//   console.log(villagers, "villagers params är false?")
+//   if(villagers ){
+//     setVillagerPage(true)
+//     setTimeout(()=>{
+//       setLoadingSpinner(false)
+//   }, 1300)
+// setLoadingSpinner(true)
+
+//   }
+//   if(filterQ === 'alph'){
+//     console.log(villagerList, "här är villagerslist")
+//     const sortedArray = alphVillagersList.sort((a, b) => {
+//       if (a.name["name-USen"] < b.name["name-USen"]) {
+//         return -1;
+//       }
+//       if (a.name["name-USen"] > b.name["name-USen"]) {
+//         return 1;
+//       }
+//       return 0;
+//     });
+//      setDisplayedVillagers(sortedArray)
+//      setTimeout(()=>{
+//       setLoadingSpinner(false)
+//   }, 1300)
+// setLoadingSpinner(true)
+//   }
+
+// else if(filterQ ==='Female' || filterQ === 'Male'){
+// setDisplayedVillagers(narrayList.filter(villager=> villager.gender === filterQ))
+// setTimeout(()=>{
+//   setLoadingSpinner(false)
+// }, 1300)
+// setLoadingSpinner(true)
+// }
+//   else 
+//    setDisplayedVillagers(narrayList)
+//    setTimeout(()=>{
+//     setLoadingSpinner(false)
+// }, 1300)
+// setLoadingSpinner(true)
+// },[filterQ, narrayList, villagers])
+
+const [songList, setSongList] = useState([])
 
 useEffect(()=>{
-  console.log(villagers, "villagers params är false?")
-  if(villagers){
-    setVillagerPage(true)
-    setTimeout(()=>{
-      setLoadingSpinner(false)
-  }, 2300)
-setLoadingSpinner(true)
+    // getVillagers()
+    // .then(villagerData => setnArrayList(villagerData))
+    // getVillagers()
+    // .then(alphvillagerData => setAlphVillagersList(alphvillagerData))
+     getSongs()
+    .then(songData => setSongList(songData))
+    console.log(songList,"här e songdata ny")
 
-  }
-  if(filterQ === 'alph'){
-    console.log(villagerList, "här är villagerslist")
-    const sortedArray = alphVillagersList.sort((a, b) => {
-      if (a.name["name-USen"] < b.name["name-USen"]) {
-        return -1;
-      }
-      if (a.name["name-USen"] > b.name["name-USen"]) {
-        return 1;
-      }
-      return 0;
-    });
-     setDisplayedVillagers(sortedArray)
-     setTimeout(()=>{
-      setLoadingSpinner(false)
-  }, 2300)
-setLoadingSpinner(true)
-  }
-
-else if(filterQ ==='Female' || filterQ === 'Male'){
-setDisplayedVillagers(narrayList.filter(villager=> villager.gender === filterQ))
-setTimeout(()=>{
-  setLoadingSpinner(false)
-}, 2300)
-setLoadingSpinner(true)
-}
-  else 
-   setDisplayedVillagers(narrayList)
-   setTimeout(()=>{
-    setLoadingSpinner(false)
-}, 2300)
-setLoadingSpinner(true)
-},[filterQ, narrayList, villagers])
+},[songList])
 
 
-useEffect(()=>{
-    getVillagers()
-    .then(villagerData => setnArrayList(villagerData))
-    getVillagers()
-    .then(alphvillagerData => setAlphVillagersList(alphvillagerData))
-},[])
 
     return(
         <>
@@ -107,14 +117,17 @@ useEffect(()=>{
         <Categories onChosenQuery={onUpdateQuery}/>
         </section>
         <div className={style.homewrapper}>
-  { villagers || filterQ ? 
+          <h1>hej</h1>
+  {/* { villagers || filterQ ? 
   loadingSpinner ?
      <Spinner /> :
       displayedVillagers.map(villager => <Villagercard 
         
         villager={villager}> </Villagercard>)
     
- : '' }
+ : '' } */}
+
+   {songList.map(song => <Songcard song={song}> </Songcard>)}
 
 
 
