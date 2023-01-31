@@ -105,9 +105,7 @@ useEffect(()=>{
     .then(songData => setSongList(songData))
     console.log(songList,"här e songdata ny")
 
-},[songList])
-
-
+},[])
 
     return(
         <>
@@ -117,7 +115,6 @@ useEffect(()=>{
         <Categories onChosenQuery={onUpdateQuery}/>
         </section>
         <div className={style.homewrapper}>
-          <h1>hej</h1>
   {/* { villagers || filterQ ? 
   loadingSpinner ?
      <Spinner /> :
