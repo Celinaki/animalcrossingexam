@@ -1,6 +1,7 @@
 import useSound from 'use-sound';
 import { useState , useEffect} from 'react';
 import { Howl } from 'howler';
+import AudioPlayer from './AudioPlayer';
 
 const Songcard = (song)=>{
     const thesong = song.song;
@@ -48,7 +49,8 @@ const Songcard = (song)=>{
     return(
         <div>
             <h1>{thesong.name["name-USen"]}</h1>
-            <button onClick={togglePlay}>{isPlaying ? 'Pause' : 'Play'}</button>
+            <AudioPlayer src={thesong.music_uri}/>
+            {/* <button onClick={togglePlay}>{isPlaying ? 'Pause' : 'Play'}</button>
             <p>
         {Math.floor(currentTime)} / {Math.floor(duration)}
       </p>
@@ -60,7 +62,7 @@ const Songcard = (song)=>{
         onChange={handleSeek}
       />
       <p>Volume: {volume}</p>
-      <input type="range" min={0} max={1} step={0.01} value={volume} onChange={handleVolume} />
+      <input type="range" min={0} max={1} step={0.01} value={volume} onChange={handleVolume} /> */}
         </div>
     )
 }
