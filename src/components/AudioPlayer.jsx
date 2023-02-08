@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Style from '../styling/AudioPlayer.module.scss'
 
 let globalAudio;
 
@@ -64,8 +65,8 @@ const AudioPlayer = ({ src }) => {
   return (
     <div>
       <button onClick={togglePlay}>{isPlaying ? 'Pause' : 'Play'}</button>
-      <p>
-      {Math.floor(currentTime)} / {Math.floor(duration)}      </p>
+<span className={Style.audioduration}>
+      <p style={{fontWeight:600}}>{Math.floor(currentTime)} </p>
       <input
         type="range"
         min={0}
@@ -73,7 +74,11 @@ const AudioPlayer = ({ src }) => {
         value={currentTime}
         onChange={handleSeek}
       />
-      <p>Volume: {volume}</p>
+      <p style={{fontWeight:600}}>{Math.floor(duration)}</p>
+</span>
+
+
+      <p  style={{fontWeight:600}}>Volume: {volume}</p>
       {/* <input type="range" min={0} max={1} step={0.01} value={volume} onChange={handleVolume} /> */}
     </div>
   );
