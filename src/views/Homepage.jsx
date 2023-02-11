@@ -23,17 +23,11 @@ const villagerList = arrayList;
 
 const [loadingSpinner, setLoadingSpinner] = useState(false)
 
-//Query from categories
-const [query, setQuery] = useState('')
-const onUpdateQuery = (q) =>{
-setQuery(q)
-console.log(query, "här e query")
-}
-//Query from categories
+
 
 
 const [filterQuery, setFilterQuery] = useState('')
-const handleFiltering= (f) => {
+const handleFiltering = (f) => {
 setFilterQuery(f)
 console.log(filterQuery, "detta e filter query")
   if(f === 'alph'){
@@ -51,68 +45,84 @@ const {filterQ} = useParams()
 const {villagers} = useParams()
 //const {songs} = useParams()
 
-// useEffect(()=>{
-//   console.log(villagers, "villagers params är false?")
-//   if(villagers ){
-//     setVillagerPage(true)
-//     setTimeout(()=>{
-//       setLoadingSpinner(false)
-//   }, 1300)
-// setLoadingSpinner(true)
+useEffect(()=>{
+  console.log(villagers, "villagers params är false?")
+  if(villagers ){
+    setVillagerPage(true)
+    setTimeout(()=>{
+      setLoadingSpinner(false)
+  }, 1300)
+setLoadingSpinner(true)
 
-//   }
-//   if(filterQ === 'alph'){
-//     console.log(villagerList, "här är villagerslist")
-//     const sortedArray = alphVillagersList.sort((a, b) => {
-//       if (a.name["name-USen"] < b.name["name-USen"]) {
-//         return -1;
-//       }
-//       if (a.name["name-USen"] > b.name["name-USen"]) {
-//         return 1;
-//       }
-//       return 0;
-//     });
-//      setDisplayedVillagers(sortedArray)
-//      setTimeout(()=>{
-//       setLoadingSpinner(false)
-//   }, 1300)
-// setLoadingSpinner(true)
-//   }
+  }
+  if(filterQ === 'alph'){
+    console.log(villagerList, "här är villagerslist")
+    const sortedArray = alphVillagersList.sort((a, b) => {
+      if (a.name["name-USen"] < b.name["name-USen"]) {
+        return -1;
+      }
+      if (a.name["name-USen"] > b.name["name-USen"]) {
+        return 1;
+      }
+      return 0;
+    });
+     setDisplayedVillagers(sortedArray)
+     setTimeout(()=>{
+      setLoadingSpinner(false)
+  }, 1300)
+setLoadingSpinner(true)
+  }
 
-// else if(filterQ ==='Female' || filterQ === 'Male'){
-// setDisplayedVillagers(narrayList.filter(villager=> villager.gender === filterQ))
-// setTimeout(()=>{
-//   setLoadingSpinner(false)
-// }, 1300)
-// setLoadingSpinner(true)
-// }
-//   else 
-//    setDisplayedVillagers(narrayList)
-//    setTimeout(()=>{
-//     setLoadingSpinner(false)
-// }, 1300)
-// setLoadingSpinner(true)
-// },[filterQ, narrayList, villagers])
+else if(filterQ ==='Female' || filterQ === 'Male'){
+setDisplayedVillagers(narrayList.filter(villager=> villager.gender === filterQ))
+setTimeout(()=>{
+  setLoadingSpinner(false)
+}, 1300)
+setLoadingSpinner(true)
+}
+  else 
+   setDisplayedVillagers(narrayList)
+   setTimeout(()=>{
+    setLoadingSpinner(false)
+}, 1300)
+setLoadingSpinner(true)
+},[filterQ, narrayList, villagers])
+
+const [currentPage, setCurrentPage] = useState('villagers')
 
 const [songList, setSongList] = useState([])
 
 useEffect(()=>{
-    // getVillagers()
-    // .then(villagerData => setnArrayList(villagerData))
-    // getVillagers()
-    // .then(alphvillagerData => setAlphVillagersList(alphvillagerData))
+     getVillagers()
+     .then(villagerData => setnArrayList(villagerData))
+     getVillagers()
+     .then(alphvillagerData => setAlphVillagersList(alphvillagerData))
      getSongs()
     .then(songData => setSongList(songData))
     console.log(songList,"här e songdata ny")
 
 },[])
 
+const [theDisplayedList,setTheDisplayedList] = useState([])
+//Query from categories
+const [query, setQuery] = useState('')
+const onUpdateQuery = (q, data) =>{
+setQuery(q)
+setCurrentPage(q)
+setTheDisplayedList(data)
+setTimeout(()=>{
+  setLoadingSpinner(false)
+}, 1300)
+setLoadingSpinner(true)
+}
+//Query from categories
+
     return(
         <>
         <Navbar/>
         <section style={{display:"flex", alignItems:"center"}}>
         <Filtering filterQuery={handleFiltering}/>
-        <Categories onChosenQuery={onUpdateQuery}/>
+        <Categories onChosenCat={onUpdateQuery}/>
         </section>
         <div className={style.homewrapper}>
   {/* { villagers || filterQ ? 
@@ -124,9 +134,21 @@ useEffect(()=>{
     
  : '' } */}
 
-   {songList.map(song => <Songcard song={song}> </Songcard>)}
+ {currentPage === 'villagers' ?
+ loadingSpinner ?
+ <Spinner /> :
+  theDisplayedList.map(villager => <Villagercard         
+  villager={villager}> </Villagercard>)
+: '' 
+}
 
-
+{currentPage === 'songs' ?
+loadingSpinner ?
+<Spinner /> :
+  theDisplayedList.map(song => <Songcard 
+  song={song}> </Songcard>)
+: ''
+}
 
         </div>
         </>

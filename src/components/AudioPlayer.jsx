@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Style from '../styling/AudioPlayer.module.scss'
+import Style from '../styling/AudioPlayer.module.scss';
+import { ImPause , ImPlay2} from "react-icons/im";
+
+
 
 let globalAudio;
 
@@ -63,9 +66,11 @@ const AudioPlayer = ({ src }) => {
 //   };
 
   return (
-    <div>
-      <button onClick={togglePlay}>{isPlaying ? 'Pause' : 'Play'}</button>
-<span className={Style.audioduration}>
+    <div className={Style.audiowrapper}>
+     
+<span className={Style.audioduration}> <button onClick={togglePlay}>
+        {isPlaying ? <ImPause/> : 
+        <ImPlay2/>}</button>
       <p style={{fontWeight:600}}>{Math.floor(currentTime)} </p>
       <input
         type="range"
@@ -73,6 +78,7 @@ const AudioPlayer = ({ src }) => {
         max={duration}
         value={currentTime}
         onChange={handleSeek}
+        style={{backgroundColor:"red", color:"red"}}
       />
       <p style={{fontWeight:600}}>{Math.floor(duration)}</p>
 </span>
