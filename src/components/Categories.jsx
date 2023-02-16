@@ -13,19 +13,18 @@ const fetchChosen = (q) => {
     if(q==='villagers'){
         getVillagers()
         .then((villagerData) =>{
- setRenderedList(villagerData) 
- console.log(renderedList)
-
- return  props.onChosenCat(q, villagerData)
+        setRenderedList(villagerData) 
+        console.log(renderedList)
+        return  props.onChosenCat(q, villagerData)
         }) 
 
     }
     if(q === 'songs'){
         getSongs()
         .then((songData) => {
-            setRenderedList(songData) 
-            console.log(renderedList)
-       return  props.onChosenCat(q, songData)
+        setRenderedList(songData) 
+        console.log(renderedList)
+        return props.onChosenCat(q, songData)
         })
     }
 }
@@ -33,33 +32,23 @@ const fetchChosen = (q) => {
     return (
         <div className={style.categorieswrap}>
 <ul className={style.listitems}>
-<NavLink to={`/villagers`}>
-     <li onClick={()=>{ fetchChosen('villagers')}}>
-        - TEST -
-    </li>
-    </NavLink>
-    <NavLink to={`/songs`}>
-     <li onClick={()=>{ fetchChosen('songs')}}>
-        - TEST2 -
-    </li>
-    </NavLink>
-   {/* <NavLink to={`/villagers`}>
-     <li onClick={()=>{onChosenQuery('villagers'); fetchChosen('villagers')}}>
+   <NavLink to={`/villagers`}>
+     <li onClick={()=>{fetchChosen('villagers')}}>
         - VILLAGERS -
     </li>
     </NavLink>
     <NavLink to={`/songs`}>
-    <li onClick={()=>onChosenQuery('songs')}>
+    <li onClick={()=>{fetchChosen('songs')}}>
         - SONGS -
     </li>    
     </NavLink>
 
-    <li onClick={()=>onChosenQuery('seacreatures')}>
+    <li onClick={()=>{fetchChosen('seacreatures')}}>
         - SEARCREATURES -
     </li>
-    <li onClick={()=>onChosenQuery('bugs')}>
+    <li onClick={()=>{fetchChosen('bugs')}}>
         - BUGS -
-    </li> */}
+    </li>
 </ul>
         </div>
     )
