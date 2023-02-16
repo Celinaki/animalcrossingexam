@@ -42,13 +42,16 @@ const fetchChosen = (q) => {
         - SONGS -
     </li>    
     </NavLink>
-
+    <NavLink to={`/seacreatures`}>
     <li onClick={()=>{fetchChosen('seacreatures')}}>
         - SEARCREATURES -
     </li>
+    </NavLink>
+    <NavLink to={`/bugs`}>
     <li onClick={()=>{fetchChosen('bugs')}}>
         - BUGS -
     </li>
+    </NavLink>
 </ul>
         </div>
     )

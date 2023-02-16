@@ -1,10 +1,18 @@
 .audiowrapper{
+    position: absolute;
+    bottom: 0;
+    width: 137%;
+    display: flex;
     .audioduration{
     display: flex;
+    width: 100%;
     position: relative;
     background-color: aliceblue;
-    width: fit-content;
 
+input{
+    width: 100%;
+
+}
     button{
         all: unset;
         cursor: pointer;

@@ -1,0 +1,20 @@
+.songcardwrapper {
+    .imageandplayer {
+        position: relative;
+        width: 50%;
+
+        .songcover {}
+
+    }
+
+    .audioplayer {}
+
+    .priceandimg {
+        display: flex;
+        img{
+            width: 40px;
+            height: 40px;
+        }
+
+    }
+}

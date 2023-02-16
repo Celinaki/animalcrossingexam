@@ -84,7 +84,7 @@ const AudioPlayer = ({ src }) => {
 </span>
 
 
-      <p  style={{fontWeight:600}}>Volume: {volume}</p>
+      {/* <p  style={{fontWeight:600}}>Volume: {volume}</p> */}
       {/* <input type="range" min={0} max={1} step={0.01} value={volume} onChange={handleVolume} /> */}
     </div>
   );
