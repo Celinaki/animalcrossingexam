@@ -93,20 +93,23 @@ const Home = () => {
   const [songList, setSongList] = useState([])
 
   useEffect(() => {
+    if(otherCriteria === false )
     getVillagers()
-      .then(villagerData => setnArrayList(villagerData))
-    getVillagers()
-      .then(alphvillagerData => setAlphVillagersList(alphvillagerData))
-    getSongs()
-      .then(songData => setSongList(songData))
-    console.log(songList, "här e songdata ny")
+      .then(villagerData => setTheDisplayedList(villagerData))
+    // getVillagers()
+    //   .then(alphvillagerData => setAlphVillagersList(alphvillagerData))
+    // getSongs()
+    //   .then(songData => setSongList(songData))
+    // console.log(songList, "här e songdata ny")
 
   }, [])
 
   const [theDisplayedList, setTheDisplayedList] = useState([])
   //Query from categories
   const [query, setQuery] = useState('')
+  const [otherCriteria, setOtherCriteria] = useState(false)
   const onUpdateQuery = (q, data) => {
+    setOtherCriteria(true)
     setQuery(q)
     setCurrentPage(q)
     setTheDisplayedList(data)
@@ -119,6 +122,7 @@ const Home = () => {
 
   //Query from filter
   const onUpdateFilter = (data) => {
+    setOtherCriteria(true)
     console.log(data, "här är data från home")
     setTheDisplayedList(data)
     setTimeout(() => {
