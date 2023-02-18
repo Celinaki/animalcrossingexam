@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Style from '../styling/AudioPlayer.module.scss';
-import { ImPause , ImPlay2} from "react-icons/im";
+import { ImPause, ImPlay2 } from "react-icons/im";
 
 
 
 let globalAudio;
 
-const AudioPlayer = ({ src }) => {
+const AudioPlayer = ({ src, hover }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [audio, setAudio] = useState(new Audio(src));
   const [currentTime, setCurrentTime] = useState(0);
@@ -23,15 +23,15 @@ const AudioPlayer = ({ src }) => {
     audio.addEventListener('timeupdate', () => {
       setCurrentTime(audio.currentTime);
     });
-    
-  audio.addEventListener('pause', () => {
-    setIsPlaying(false);
-  });
+
+    audio.addEventListener('pause', () => {
+      setIsPlaying(false);
+    });
 
     return () => {
-      audio.removeEventListener('loadedmetadata', () => {});
-      audio.removeEventListener('timeupdate', () => {});
-      audio.removeEventListener('pause', () => {});
+      audio.removeEventListener('loadedmetadata', () => { });
+      audio.removeEventListener('timeupdate', () => { });
+      audio.removeEventListener('pause', () => { });
 
     };
   }, [audio]);
@@ -41,7 +41,7 @@ const AudioPlayer = ({ src }) => {
       globalAudio.pause();
       setIsPlaying(false)
     }
-  
+
     if (isPlaying) {
       audio.pause();
       setIsPlaying(false);
@@ -54,34 +54,36 @@ const AudioPlayer = ({ src }) => {
     //setIsPlaying(!isPlaying);
     globalAudio = audio;
   };
-  
+
 
   const handleSeek = (e) => {
     audio.currentTime = e.target.value;
   };
 
-//   const handleVolume = (e) => {
-//     setVolume(e.target.value);
-//     audio.volume = e.target.value;
-//   };
+  //   const handleVolume = (e) => {
+  //     setVolume(e.target.value);
+  //     audio.volume = e.target.value;
+  //   };
 
   return (
-    <div className={Style.audiowrapper}>
-     
-<span className={Style.audioduration}> <button onClick={togglePlay}>
-        {isPlaying ? <ImPause/> : 
-        <ImPlay2/>}</button>
-      <p style={{fontWeight:600}}>{Math.floor(currentTime)} </p>
-      <input
-        type="range"
-        min={0}
-        max={duration}
-        value={currentTime}
-        onChange={handleSeek}
-        style={{backgroundColor:"red", color:"red"}}
-      />
-      <p style={{fontWeight:600}}>{Math.floor(duration)}</p>
-</span>
+    <div className={`${Style.audiowrapper} ${hover === false ? Style.audiohover : ''}`}
+
+      style={{ opacity: hover === false ? 0 : 1 , transition:100}}>
+
+      <span className={Style.audioduration}> <button onClick={togglePlay}>
+        {isPlaying ? <ImPause /> :
+          <ImPlay2 />}</button>
+        <p style={{ fontWeight: 600 }}>{Math.floor(currentTime)} </p>
+        <input
+          type="range"
+          min={0}
+          max={duration}
+          value={currentTime}
+          onChange={handleSeek}
+          style={{ backgroundColor: "red", color: "red" }}
+        />
+        <p style={{ fontWeight: 600 }}>{Math.floor(duration)}</p>
+      </span>
 
 
       {/* <p  style={{fontWeight:600}}>Volume: {volume}</p> */}
