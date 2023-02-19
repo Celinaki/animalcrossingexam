@@ -64,11 +64,30 @@ const AudioPlayer = ({ src, hover }) => {
   //     setVolume(e.target.value);
   //     audio.volume = e.target.value;
   //   };
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 800);
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
-    <div className={`${Style.audiowrapper} ${hover === false ? Style.audiohover : ''}`}
-
-      style={{ opacity: hover === false ? 0 : 1 , transition:100}}>
+    <div 
+    className={`${Style.audiowrapper} ${hover === false ? Style.audiohover : ''}`}
+    style={
+      isMobile ? 
+      { opacity: 1 } :
+      { opacity: hover === false ? 0 : 1, transition: '100ms' }
+    }
+  >
 
       <span className={Style.audioduration}> <button onClick={togglePlay}>
         {isPlaying ? <ImPause /> :

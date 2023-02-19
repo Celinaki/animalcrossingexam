@@ -89,8 +89,7 @@ const Home = () => {
   //   setLoadingSpinner(true)
   // }, [filterQ, narrayList, villagers])
 
-  const [currentPage, setCurrentPage] = useState('villagers')
-
+ 
   const [songList, setSongList] = useState([])
 
   useEffect(() => {
@@ -105,7 +104,12 @@ const Home = () => {
 
   }, [])
 
+
+
+
+  const [currentPage, setCurrentPage] = useState('villagers')
   const [theDisplayedList, setTheDisplayedList] = useState([])
+
   //Query from categories
   const [query, setQuery] = useState('')
   const [otherCriteria, setOtherCriteria] = useState(false)
@@ -132,6 +136,7 @@ const Home = () => {
     setLoadingSpinner(true)
   }
   //Query from filter
+  
 
   return (
     <>
