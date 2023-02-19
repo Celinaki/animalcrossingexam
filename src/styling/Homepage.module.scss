@@ -14,7 +14,13 @@
     margin: auto;
     display: grid;
     row-gap: 2rem;
-    grid-template-columns: 5fr 5fr 5fr 5fr;
+    // grid-template-columns: 5fr 5fr 5fr 5fr;
+    
+    grid-template-columns: repeat(4, 1fr);
+
+    grid-auto-rows: 1fr;
     place-items: center;
+
+    align-items: flex-start;
    }
   }
