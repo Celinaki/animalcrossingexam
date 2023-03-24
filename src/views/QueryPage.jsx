@@ -1,3 +1,4 @@
+
 import { useState, useEffect, React } from "react";
 import { useSearchParams } from "react-router-dom";
 import Navbar from '../components/Navbar'
@@ -12,9 +13,8 @@ import Spinner from '../components/Spinner.jsx';
 import Songcard from "../components/Songcard";
 import NavWave from "../components/NavWave";
 
-const Home = () => {
+const QueryPage = () => {
   //Todos: Pagination, filtering
-  const [searchParams, setSearchParams] = useSearchParams();
 
   //Array lists
   const [alphVillagersList, setAlphVillagersList] = useState([])
@@ -91,14 +91,13 @@ const Home = () => {
   //   setLoadingSpinner(true)
   // }, [filterQ, narrayList, villagers])
 
-
+ 
   const [songList, setSongList] = useState([])
 
   useEffect(() => {
-    if (otherCriteria === false)
-      getVillagers()
-        .then(villagerData => setTheDisplayedList(villagerData))
-
+    if(otherCriteria === false )
+    getVillagers()
+      .then(villagerData => setTheDisplayedList(villagerData))
     // getVillagers()
     //   .then(alphvillagerData => setAlphVillagersList(alphvillagerData))
     // getSongs()
@@ -130,7 +129,6 @@ const Home = () => {
 
   //Query from filter
   const onUpdateFilter = (data) => {
-
     setOtherCriteria(true)
     console.log(data, "här är data från home")
     setTheDisplayedList(data)
@@ -140,43 +138,65 @@ const Home = () => {
     setLoadingSpinner(true)
   }
   //Query from filter
+  
+  const [searchParams, setSearchParams] = useSearchParams()
 
-  const [search, setSearch] = useState('')
-  const [searchArray, setSearchArray] = useState([])
-  useEffect(() => {
-    if (search && typeof search === 'string') {
-      setSearchArray(
-        theDisplayedList.filter(item =>
-          item.name["name-USen"].toLowerCase().includes(search.toLowerCase()))
-      )
+useEffect(()=>{
+  console.log("jaha")
+  for(let i=0; i <= searchParams.values.length; i++){
+    if(searchParams[i]=="/villagers"){
+          console.log("hej")
+
     }
-  }, [search, theDisplayedList])
+  }
 
+  if(searchParams =="?%2Fsongs="){
+    console.log("hej")
+  }
+},[searchParams])
   return (
     <>
       <Navbar />
       <NavWave />
       <section style={{ display: "flex", alignItems: "center" }}>
-        <Filtering onUpdatedFilter={onUpdateFilter}  />
+        <Filtering onUpdatedFilter={onUpdateFilter} />
         <Categories onChosenCat={onUpdateQuery} />
       </section>
-      <input type="text" onChange={(e) => setSearch(e.target.value)} />
-      <div className={style.homewrapper}>
-        {loadingSpinner ? (
-          <Spinner> </Spinner>
-        ) : search !== '' ? (
-          searchArray.length > 0 ? (
-            searchArray.map(villager => <Villagercard villager={villager} />)
-          ) : (
-            <p>No results found for "{search}"</p>
-          )
-        ) : (
-          theDisplayedList.map(villager => <Villagercard villager={villager} />)
-        )}
+      <div>
+            <button onClick={() => setSearchParams("/villagers")}>1</button>
+            <button onClick={() => setSearchParams("/songs")}>2</button>
+            <h1>Query is {searchParams}</h1>
+        </div>      <div className={style.homewrapper}>
+        {/* { villagers || filterQ ? 
+  loadingSpinner ?
+     <Spinner /> :
+      displayedVillagers.map(villager => <Villagercard 
+        
+        villager={villager}> </Villagercard>)
+    
+ : '' } */}
+
+        {currentPage === 'villagers' ?
+          loadingSpinner ?
+            <Spinner /> :
+            theDisplayedList.map(villager => <Villagercard
+              villager={villager}> </Villagercard>)
+          : ''
+        }
+
+        {currentPage === 'songs' ?
+          loadingSpinner ?
+            <Spinner /> :
+            theDisplayedList.map(song => <Songcard
+              song={song}> </Songcard>)
+          : ''
+        }
+
       </div>
     </>
-
-  )
+    )
 }
 
-export default Home 
+export default QueryPage;
+
+

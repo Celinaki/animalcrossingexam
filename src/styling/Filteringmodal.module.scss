@@ -14,15 +14,21 @@
         transform: rotate(-180deg);
         width: min-content;
         height: min-content;
+        top: 0;
+        
     }
 }
 .filterwrap, .filterwrapactive{
     transition: 200ms;
 
 img{
+    position: absolute;
     width: 2.6rem;
     transition: 500ms;
-    padding-left: 1rem;
+    margin-top: 1.5rem;
+    padding-left: 10%;
+
+
 }
 .filterlist{
     display: none;

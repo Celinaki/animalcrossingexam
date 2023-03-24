@@ -74,6 +74,12 @@ const Filtering = ( props ) => {
         props.onUpdatedFilter(passedArray);
     }, [passedArray]);
 
+    useEffect(()=>{
+        if(props.fromPage !== 'songPage'){
+            console.log("haha")
+        }  
+    },[])
+    
     return (
         <div className={filterActive ? `${style.filterwrapactive}` : style.filterwrap} ref={ref}>
             <img src={Filterbtn} alt="Filtering button"
@@ -83,7 +89,32 @@ const Filtering = ( props ) => {
             />
             <div className={filterActive ? `${style.filterlist} ${style.filterlistactive}` : style.filterlist}>
                 <h1>Sort by</h1>
-                <NavLink to={`/villagers/filters/alph`}
+                {
+                    props.fromPage == 'songPage' ?
+                    <>
+                       <NavLink to={`/villagers/filters/alph`}
+                    style={({ isActive }) => ({ color: isActive ? '#90d6d6' : 'inherit' })}
+                    onClick={() => {setFilterActive(false); setFilteredArray('Alph');  }}>
+                    <h2>Alphabetical order</h2>
+                </NavLink>
+                <NavLink to={`/villagers/filters/Female`}
+                    style={({ isActive }) => ({ color: isActive ? '#90d6d6' : 'inherit' })}
+                    onClick={() => {setFilterActive(false); setFilteredArray('Female')}}>
+                    <h2>Highest price</h2>
+                </NavLink>
+                <NavLink to={`/villagers/filters/Male`}
+                    style={({ isActive }) => ({ color: isActive ? '#90d6d6' : 'inherit' })}
+                    onClick={() => {setFilterActive(false);  setFilteredArray('Male')}}>
+                    <h2>Lowest price</h2>
+                </NavLink>
+                <NavLink to={`/villagers`}
+                    onClick={() => {setFilterActive(false);  setFilteredArray('Reset')}}>
+                    <h2>Reset</h2>
+                </NavLink>
+                    </>
+                    :
+                    <>
+                       <NavLink to={`/villagers/filters/alph`}
                     style={({ isActive }) => ({ color: isActive ? '#90d6d6' : 'inherit' })}
                     onClick={() => {setFilterActive(false); setFilteredArray('Alph');  }}>
                     <h2>Alphabetical order</h2>
@@ -102,6 +133,27 @@ const Filtering = ( props ) => {
                     onClick={() => {setFilterActive(false);  setFilteredArray('Reset')}}>
                     <h2>Reset</h2>
                 </NavLink>
+                    </>
+                }
+                {/* <NavLink to={`/villagers/filters/alph`}
+                    style={({ isActive }) => ({ color: isActive ? '#90d6d6' : 'inherit' })}
+                    onClick={() => {setFilterActive(false); setFilteredArray('Alph');  }}>
+                    <h2>Alphabetical order</h2>
+                </NavLink>
+                <NavLink to={`/villagers/filters/Female`}
+                    style={({ isActive }) => ({ color: isActive ? '#90d6d6' : 'inherit' })}
+                    onClick={() => {setFilterActive(false); setFilteredArray('Female')}}>
+                    <h2>Females</h2>
+                </NavLink>
+                <NavLink to={`/villagers/filters/Male`}
+                    style={({ isActive }) => ({ color: isActive ? '#90d6d6' : 'inherit' })}
+                    onClick={() => {setFilterActive(false);  setFilteredArray('Male')}}>
+                    <h2>Males</h2>
+                </NavLink>
+                <NavLink to={`/villagers`}
+                    onClick={() => {setFilterActive(false);  setFilteredArray('Reset')}}>
+                    <h2>Reset</h2>
+                </NavLink> */}
             </div>
         </div>
     )

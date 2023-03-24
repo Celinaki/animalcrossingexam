@@ -1,8 +1,9 @@
 
 .villagercard{
     width: 85%;
-    border: 4px solid #D78A46 ;
-    border-radius: 10%;
+    // border: 3px solid #D78A46 ;
+    box-shadow: rgba(80, 54, 25, 0.267) 0px 5px 15px;  
+      border-radius: 12px;
     // box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -15,19 +16,36 @@
         p{
             width: 90%;
             margin: 0;
-            font-family:monospace;
+            margin-top: 1rem;
+            // font-family:monospace;
+            font-family: 'Poppins';
             font-weight: 800;
             align-self: center;
         }
+        .birthday{
+            gap: 0.5rem;
+            background-color: #d78a4662;
+            padding: 0.2rem;
+            border-radius: 12px;
+            // align-items: center;
+        }
     
-    
-    .villagericon{
-        border-radius: 15%;
-        border: 5px solid #D78A46;
+    .iconholder{
+      
         width: 45%;
         height: 50%;
         align-self: center;
+            .villagericon{
+                border-radius: 15%;
+                border: 5px solid #D78A46;
+       width: 100%;
+       height: 100%;
+    //    border-radius: 15%;
+        // transform: translateY(-30%);
     } 
+
+    }
+
     span{
         display: flex;
         align-self: center;

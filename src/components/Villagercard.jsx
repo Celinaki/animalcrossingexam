@@ -12,6 +12,7 @@ import sagittarius from '../assets/zodiac-sagittarius.svg'
 import scorpio from '../assets/zodiac-scorpio.svg'
 import taurus from '../assets/zodiac-taurus.svg'
 import virgo from '../assets/zodiac-virgo.svg'
+import BdayCake from '../assets/mdi_birthday-cake-outline.svg'
 
 
 const Villagercard = (thevillager) => {
@@ -112,7 +113,7 @@ const Villagercard = (thevillager) => {
         const pronouns = "he";
         return <p>
             {name} is a specie of {species} and {pronouns} is a bit {personality.toLowerCase()}  
-             .When {name} catches something {pronouns} says "{phrase}"".
+             . When {name} catches something {pronouns} says "{phrase}"".
         </p>
         }
         else  if(gender === "Female"){
@@ -124,13 +125,16 @@ const Villagercard = (thevillager) => {
     return (
         <div className={style.villagercard}>
             <section>
+                <div className={style.iconholder}>
                 <img src={villager.image_uri} className={style.villagericon} alt="" />
+
+                </div>
                 <span>
                     <h1>{villager.name["name-USen"]}</h1>
                     {genders(villager.gender)}
                 </span>
-                <span>
-                <h2>Birthday: {villager['birthday-string']} </h2>{zodiac(villager['birthday-string'])}</span>
+                <span className={style.birthday}>
+              <img src={BdayCake} alt="" />   <h2>{villager['birthday-string']} </h2>{zodiac(villager['birthday-string'])}</span>
                    <p>{villagerdescription(
                         villager.name["name-USen"],
                         villager.species,
