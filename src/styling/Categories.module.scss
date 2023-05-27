@@ -2,7 +2,7 @@
     width: 100%;
     .listitems{
         display: flex;
-        width: 50%;
+        width: 80%;
         margin: auto;
         list-style: none;
         justify-content: space-between;
@@ -40,6 +40,8 @@
     .categorieswrap{
         .listitems{
             flex-direction: row;
+            width: 50%;
+
         }
     }
 }
