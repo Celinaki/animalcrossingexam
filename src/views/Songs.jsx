@@ -27,14 +27,14 @@ const Songs = () => {
 
   useEffect(() => {
     getSongs()
-    .then((songData) => {
-    setTheDisplayedList(songData) 
-    console.log(theDisplayedList)
-    })
+      .then((songData) => {
+        setTheDisplayedList(songData)
+        console.log(theDisplayedList)
+      })
     setTimeout(() => {
-        setLoadingSpinner(false)
-      }, 1300)
-      setLoadingSpinner(true)
+      setLoadingSpinner(false)
+    }, 1300)
+    setLoadingSpinner(true)
   }, [])
 
 
@@ -63,78 +63,80 @@ const Songs = () => {
     }, 1300)
     setLoadingSpinner(true)
   }
-  
+
   //Query from filter
 
-const [search, setSearch] = useState('')
-const [searchArray, setSearchArray] = useState([])
-useEffect(()=>{
-if(search && typeof search === 'string'){
-  setSearchArray(
-    currentItems.filter(item =>
-    item.name["name-USen"].toLowerCase().includes(search.toLowerCase()))
-  )
-}
-},[search, theDisplayedList])
+  const [search, setSearch] = useState('')
+  const [searchArray, setSearchArray] = useState([])
+  useEffect(() => {
+    if (search && typeof search === 'string') {
+      setSearchArray(
+        currentItems.filter(item =>
+          item.name["name-USen"].toLowerCase().includes(search.toLowerCase()))
+      )
+    }
+  }, [search, theDisplayedList])
 
-const searchOnQuery = (e)=>{
-  console.log(e)
-  setSearch(e)
-}
+  const searchOnQuery = (e) => {
+    console.log(e)
+    setSearch(e)
+  }
 
 
-const [currentItems, setCurrentItems] = useState([])
-const [pageCount, setPageCount ] = useState(0)
-const [itemOffset, setItemOffset] = useState(0)
-const itemsPerPage = 16
+  const [currentItems, setCurrentItems] = useState([])
+  const [pageCount, setPageCount] = useState(0)
+  const [itemOffset, setItemOffset] = useState(0)
+  const itemsPerPage = 16
 
-useEffect(()=>{
+  useEffect(() => {
 
-  const endOffset = itemOffset + itemsPerPage;
-  setCurrentItems(theDisplayedList.slice(itemOffset, endOffset));
-  setPageCount(Math.ceil(theDisplayedList.length / itemsPerPage));
-}, [itemOffset, itemsPerPage, theDisplayedList]);
+    const endOffset = itemOffset + itemsPerPage;
+    setCurrentItems(theDisplayedList.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(theDisplayedList.length / itemsPerPage));
+  }, [itemOffset, itemsPerPage, theDisplayedList]);
 
-const handlePageClick = (event) =>{
-  const newOffset = (event.selected * itemsPerPage) %  theDisplayedList.length;
-  setItemOffset(newOffset)
-}
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % theDisplayedList.length;
+    setItemOffset(newOffset)
+  }
   return (
     <>
       <Navbar />
       <NavWave />
-      <SearchBar searchOnQuery={searchOnQuery}/>
       <section style={{ display: "flex", alignItems: "center" }}>
         <Categories onChosenCat={onUpdateQuery} />
-      </section>
+      </section> 
+       <SearchBar searchOnQuery={searchOnQuery} />
+
       <div className={style.homewrapper}>
-      {loadingSpinner ? (
-  <Spinner> </Spinner>
-) : search !== '' ? (
-  searchArray.length > 0 ? (
-    searchArray.map(song => <Songcard song={song} />)
-  ) : (
-    <p>No results found for "{search}"</p>
-  )
-) : (
-  currentItems.map(song => <Songcard song={song} />)
-)}
+
+        {loadingSpinner ? (
+          <Spinner> </Spinner>
+        ) : search !== '' ? (
+          searchArray.length > 0 ? (
+            searchArray.map(song => <Songcard song={song} />)
+          ) : (
+            <p>No results found for "{search}"</p>
+          )
+        ) : (
+          currentItems.map(song => <Songcard song={song} />)
+        )}
       </div>
       <ReactPaginate
-  breakLabel="..."
-  nextLabel="Next"
-  onPageChange={handlePageClick}
-  pageRangeDisplayed={3}
-  pageCount={pageCount}
-  previousLabel="Previous"
-  renderOnZeroPageCount={null}
-  containerClassName="pagination"
-  pageLinkClassName="page-num"
-  previousLinkClassName=""
-  nextLinkClassName=""
-  activeLinkClassName="page-active"
+        breakLabel="..."
+        nextLabel="Next"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={3}
+        pageCount={pageCount}
+        previousLabel="Previous"
+        renderOnZeroPageCount={null}
+        containerClassName="pagination"
+        pageLinkClassName="page-num"
+        previousLinkClassName=""
+        nextLinkClassName=""
+        activeLinkClassName="page-active"
 
-/>
+      />
     </>
 
   )

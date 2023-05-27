@@ -1,47 +1,73 @@
-.homewrapper{
- //background-color: #FFF3E8;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-    padding: 3rem 1rem;
-    position: relative;
+.homewrapper {
+  //background-color: #FFF3E8;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 3rem 1rem;
+  position: relative;
 
 
-}    .sortingholder{
-      display:flex;
-      width:95%;
-      justify-content:flex-end;
-      align-items: flex-end;
-    }
+}
+
+.sortingholder {
+  display: flex;
+  width: 95%;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+.sortingholderhome {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+}
+
 @media screen and (min-width: 500px) {
-  .homewrapper{
+  .homewrapper {
     width: 95%;
     margin: auto;
     display: grid;
     row-gap: 5rem;
     grid-template-columns: repeat(2, 1fr);
     place-items: center;
-    align-items: flex-start;    
+    align-items: flex-start;
   }
-  .sortingholder{
+
+  .sortingholder {
     width: 95%;
   }
+  .sortingholderhome {
+    width: 88%;
+    margin: auto;
+  }
 }
-@media screen and (min-width: 840px){
-  .homewrapper{
 
+@media screen and (min-width: 840px) {
+  .homewrapper {
     grid-template-columns: repeat(3, 1fr);
 
-   }
+  }
+  .sortingholderhome {
+    width: 90%;
+    margin: auto;
+  }
 }
+
 @media screen and (min-width: 1025px) {
-   .homewrapper{
+  .homewrapper {
     width: 80%;
     grid-template-columns: repeat(4, 1fr);
 
-   }
-   .sortingholder{
+  }
+
+  .sortingholder {
     width: 90%;
   }
+
+  .sortingholderhome {
+    width: 77%;
+    margin: auto;
   }
+}

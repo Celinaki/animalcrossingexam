@@ -3,12 +3,16 @@ display: flex;
 justify-content: center;
 width: 100%;
 // transform:translateY(-250%);
+margin: 3rem 0rem;
 
 .input{
     border-radius: 12px;
     padding: 0.8rem 1.5rem;
     border-style: none;
-    background-color: rgb(200, 219, 219);
+   // background-color: rgb(200, 219, 219);
+   background-color: rgb(255, 255, 255);
+   border:1px solid #7593a5 ;
+
 
     &:focus{
         outline: 0.5px solid rgb(154, 180, 180);

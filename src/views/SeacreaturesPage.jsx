@@ -26,14 +26,14 @@ const SeacreaturesPage = () => {
 
   useEffect(() => {
     getSeacreatures()
-    .then((data) => {
-    setTheDisplayedList(data) 
-    console.log(theDisplayedList)
-    })
+      .then((data) => {
+        setTheDisplayedList(data)
+        console.log(theDisplayedList)
+      })
     setTimeout(() => {
-        setLoadingSpinner(false)
-      }, 1300)
-      setLoadingSpinner(true)
+      setLoadingSpinner(false)
+    }, 1300)
+    setLoadingSpinner(true)
 
 
   }, [])
@@ -67,7 +67,7 @@ const SeacreaturesPage = () => {
     }, 1300)
     setLoadingSpinner(true)
   }
-  
+
   //Query from filter
 
   const [search, setSearch] = useState('')
@@ -81,41 +81,38 @@ const SeacreaturesPage = () => {
     }
   }, [search, theDisplayedList])
 
-  const searchOnQuery = (e)=>{
+  const searchOnQuery = (e) => {
     console.log(e)
     setSearch(e)
   }
 
   const [currentItems, setCurrentItems] = useState([])
-  const [pageCount, setPageCount ] = useState(0)
+  const [pageCount, setPageCount] = useState(0)
   const [itemOffset, setItemOffset] = useState(0)
   const itemsPerPage = 16
 
-  useEffect(()=>{
+  useEffect(() => {
 
     const endOffset = itemOffset + itemsPerPage;
     setCurrentItems(theDisplayedList.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(theDisplayedList.length / itemsPerPage));
   }, [itemOffset, itemsPerPage, theDisplayedList]);
 
-  const handlePageClick = (event) =>{
-    const newOffset = (event.selected * itemsPerPage) %  theDisplayedList.length;
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % theDisplayedList.length;
     setItemOffset(newOffset)
   }
- 
+
   return (
     <>
       <Navbar />
       <NavWave />
-      <SearchBar searchOnQuery={searchOnQuery}/>
-
       <section style={{ display: "flex", alignItems: "center" }}>
-        
-        
         <Categories onChosenCat={onUpdateQuery} />
       </section>
+      <SearchBar searchOnQuery={searchOnQuery} />
       <span className={style.sortingholder}>
-        <SortBy onUpdatedFilter={onUpdateFilter} fromPage={'bugPage'}/>
+        <SortBy onUpdatedFilter={onUpdateFilter} fromPage={'bugPage'} />
       </span>
       {/* <input type="text" onChange={(e) => setSearch(e.target.value)} /> */}
       <div className={style.homewrapper}>
@@ -132,20 +129,20 @@ const SeacreaturesPage = () => {
         )}
       </div>
       <ReactPaginate
-  breakLabel="..."
-  nextLabel="Next"
-  onPageChange={handlePageClick}
-  pageRangeDisplayed={3}
-  pageCount={pageCount}
-  previousLabel="Previous"
-  renderOnZeroPageCount={null}
-  containerClassName="pagination"
-  pageLinkClassName="page-num"
-  previousLinkClassName=""
-  nextLinkClassName=""
-  activeLinkClassName="page-active"
+        breakLabel="..."
+        nextLabel="Next"
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={3}
+        pageCount={pageCount}
+        previousLabel="Previous"
+        renderOnZeroPageCount={null}
+        containerClassName="pagination"
+        pageLinkClassName="page-num"
+        previousLinkClassName=""
+        nextLinkClassName=""
+        activeLinkClassName="page-active"
 
-/>
+      />
     </>
 
   )

@@ -11,44 +11,49 @@ const [renderedList, setRenderedList] = useState([])
 const location = useLocation()
 
 const fetchChosen = (q) => {
-    if(q==='villagers'){
-        getVillagers()
-        .then((villagerData) =>{
-        setRenderedList(villagerData) 
-        console.log(renderedList)
-        return  props.onChosenCat(q, villagerData)
-        }) 
+//     if(q==='villagers'){
+//         getVillagers()
+//         .then((villagerData) =>{
+//         setRenderedList(villagerData) 
+//         console.log(renderedList)
+//         return  props.onChosenCat(q, villagerData)
+//         }) 
 
-    }
-    if(q === 'songs'){
-        getSongs()
-        .then((songData) => {
-        setRenderedList(songData) 
-        console.log(renderedList)
-        return props.onChosenCat(q, songData)
-        })
-    }
-}
+//     }
+//     if(q === 'songs'){
+//         getSongs()
+//         .then((songData) => {
+//         setRenderedList(songData) 
+//         console.log(renderedList)
+//         return props.onChosenCat(q, songData)
+//         })
+//     }
+ }
 
     return (
         <div className={style.categorieswrap}>
 <ul className={style.listitems}>
-   <NavLink to={`/villagers`}>
-     <li onClick={()=>{fetchChosen('villagers'); }}>
+   <NavLink to={`/villagers`}
+      style={({ isActive }) => ({ background: isActive ? 'rgb(222 184 135 / 61%)' : '' })}>
+     <li 
+     onClick={()=>{fetchChosen('villagers'); }}>
         - VILLAGERS -
     </li>
     </NavLink>
-    <NavLink to={`/songs`}>
+    <NavLink to={`/songs`}
+      style={({ isActive }) => ({ background: isActive ? 'rgb(222 184 135 / 61%)' : '' })}>
     <li onClick={()=>{fetchChosen('songs')}}>
         - SONGS -
     </li>    
     </NavLink>
-    <NavLink to={`/seacreatures`}>
+    <NavLink to={`/seacreatures`}
+      style={({ isActive }) => ({ background: isActive ? 'rgb(222 184 135 / 61%)' : '' })}>
     <li onClick={()=>{fetchChosen('seacreatures')}}>
         - SEARCREATURES -
     </li>
     </NavLink>
-    <NavLink to={`/bugs`}>
+    <NavLink to={`/bugs`}
+      style={({ isActive }) => ({ background: isActive ? 'rgb(222 184 135 / 61%)' : '' })}>
     <li onClick={()=>{fetchChosen('bugs')}}>
         - BUGS -
     </li>

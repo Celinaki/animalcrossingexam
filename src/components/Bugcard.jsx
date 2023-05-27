@@ -64,13 +64,15 @@ const BugCard = (bug) => {
 
             </article>
             <span className={`${style.flexed}`}>
-                <img src={ClockIcon} alt="" />
-                {getTime(thebug.availability["time"])}
+            <span class="material-symbols-outlined">
+                    schedule
+                </span>                {getTime(thebug.availability["time"])}
             </span>
             <section className={style.monthsAndIcons}>
                 <span className={`${style.flexed}`}>
-                    <img src={CalenderIcon} alt="" />
-                    {
+                <span class="material-symbols-outlined">
+                        calendar_today
+                    </span>                    {
                         allMonths ? <h2>It's available all months of the year</h2> :
                             <h2>Available during these months</h2>
 
@@ -81,14 +83,16 @@ const BugCard = (bug) => {
                 </span>
             </section>
             <span className={style.flexed}>
-                <img src={MoneyIcon} alt="" />
-                <h2>It goes for {thebug.price}  </h2>
+            <span class="material-symbols-outlined">
+                    monetization_on
+                </span>                <h2>It goes for {thebug.price}  </h2>
                 <img src={checkPrice(thebug.price)} alt="" />
             </span>
             <span className={style.flexed}>
-                <img src={MoneyIcon} alt="" />
-                <h2>Sells for {thebug["price-flick"]} at Flicks  </h2>
-                <img src={checkPrice(thebug.price)} alt="" />
+            <span class="material-symbols-outlined">
+                    monetization_on
+                </span>                <h2>Sells for {thebug["price-flick"]} <img src={checkPrice(thebug.price)} alt="" />at Flicks  </h2>
+                
             </span>
             {
                 showMore === true ?
@@ -103,12 +107,20 @@ const BugCard = (bug) => {
                             data-aos="fade-right"
                             data-aos-delay="100"
                             data-aos-easing="ease-in"
-                            data-aos-duaration="100"> <img src={MegaIcon} alt="" /><h2>Catchphrase: "{thebug["catch-phrase"]}"</h2></span>
+                            data-aos-duaration="100"> 
+  <span class="material-symbols-outlined">
+                                campaign
+                            </span>                     
+                                 <h2>Catchphrase: "{thebug["catch-phrase"]}"</h2>
+                            </span>
                         <span className={style.flexed}
                             data-aos="fade-right"
                             data-aos-delay="200"
                             data-aos-easing="ease-in"
-                            data-aos-duaration="100"><img src={OwlIcon} alt="" /><h2>Museumphrase: {thebug["museum-phrase"]}</h2> </span>
+                            data-aos-duaration="100">
+                                <img src={OwlIcon} alt="" />
+                                <h2>Museumphrase: {thebug["museum-phrase"]}</h2> 
+                                </span>
                     </div>
 
                     :

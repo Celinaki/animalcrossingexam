@@ -108,10 +108,10 @@ console.log(theDisplayedList, "bugsdata är här")
     <>
       <Navbar />
       <NavWave />
-      <SearchBar searchOnQuery={searchOnQuery}/>
       <section style={{ display: "flex", alignItems: "center" }}>
         <Categories onChosenCat={onUpdateQuery}/>
       </section>
+      <SearchBar searchOnQuery={searchOnQuery}/>
       <span className={style.sortingholder}>
         <SortBy onUpdatedFilter={onUpdateFilter} fromPage={'bugPage'}/>
       </span>

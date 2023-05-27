@@ -4,7 +4,6 @@ import Homepage from './views/Homepage';
 import BugsPage from './views/BugsPage'
 import Songs from './views/Songs'
 import Singlevillager from './views/Singlevillager';
-import QueryPage from './views/QueryPage';
 import SeacreaturesPage from './views/SeacreaturesPage';
 import Aos from 'aos';
 
@@ -13,7 +12,6 @@ function App() {
   return (
     <Router>
     <Routes>
-      <Route path="/home" element={<QueryPage/>}/>
       <Route path="/" element={<Homepage/>}/>
       <Route path="/bugs" element={<BugsPage/>}/>
       <Route path="/songs" element={<Songs/>}/>
