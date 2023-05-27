@@ -13,6 +13,7 @@ import SearchBar from "../components/Searchbar";
 import ReactPaginate from "react-paginate";
 import globalStyle from '../App.css'
 import SortBy from "../components/SortBy";
+import Footer from "../components/Footer";
 
 const SeacreaturesPage = () => {
   //Todos: Pagination, filtering
@@ -143,6 +144,7 @@ const SeacreaturesPage = () => {
         activeLinkClassName="page-active"
 
       />
+      <Footer/>
     </>
 
   )

@@ -13,6 +13,7 @@ import BugCard from "../components/Bugcard";
 import ReactPaginate from "react-paginate";
 import globalStyle from '../App.css'
 import SortBy from "../components/SortBy";
+import Footer from "../components/Footer";
 
 const Home = () => {
   //Todos: Pagination, filtering
@@ -159,6 +160,7 @@ console.log(theDisplayedList, "bugsdata är här")
   activeLinkClassName="page-active"
 
 />
+<Footer/>
     </>
 
   )

@@ -14,6 +14,7 @@ import NavWave from "../components/NavWave";
 import SearchBar from "../components/Searchbar";
 import ReactPaginate from "react-paginate";
 import globalStyle from '../App.css'
+import Footer from "../components/Footer";
 
 const Songs = () => {
   //Todos: Pagination, filtering
@@ -137,6 +138,7 @@ const Songs = () => {
         activeLinkClassName="page-active"
 
       />
+      <Footer/>
     </>
 
   )

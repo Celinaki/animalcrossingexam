@@ -38,7 +38,7 @@ const AboutPage = () =>{
       
         <p style={{textAlign:"center"}}
          data-aos="fade-up"
-         data-aos-delay="400"
+         data-aos-delay="300"
          data-aos-easing="ease-in"
          data-aos-duaration="100">Thank you for reading!</p>
         
