@@ -7,7 +7,9 @@ const SearchBar = (props) => {
     }
     return(
 <div className={styles.searchholder}>
-<input className={styles.input} placeholder="Search for.." type="text" onChange={(e)=>updateState(e.target.value)}/>
+<input className={styles.input}
+ placeholder="Search for.." type="text" 
+ onChange={(e)=>updateState(e.target.value)}/>
 </div>
         )
 }

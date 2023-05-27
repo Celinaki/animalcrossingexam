@@ -83,6 +83,11 @@ const BugCard = (bug) => {
                 <h2>It goes for {thebug.price}  </h2>
                 <img src={checkPrice(thebug.price)} alt="" />
             </span>
+            <span className={style.flexed}>
+                <img src={MoneyIcon} alt="" />
+                <h2>Sells for {thebug["price-flick"]} at Flicks  </h2>
+                <img src={checkPrice(thebug.price)} alt="" />
+            </span>
             {
                 showMore === true ?
                     <div className={style.back}>
