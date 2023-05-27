@@ -31,9 +31,7 @@
       .navLink{
         color: initial;
         text-decoration: none;
-
         position: relative;
-  
         cursor: pointer;
 
         &::after {
@@ -44,7 +42,7 @@
             height: 1.5px;
             bottom: 0;
             left: 0;
-            background-color: black;
+            background-color: #363636d5;
             transform-origin: bottom right;
             transition: transform 0.25s ease-in;
         }

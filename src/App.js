@@ -6,6 +6,7 @@ import Songs from './views/Songs'
 import Singlevillager from './views/Singlevillager';
 import SeacreaturesPage from './views/SeacreaturesPage';
 import Aos from 'aos';
+import AboutPage from './views/About';
 
 function App() {
   Aos.init() 
@@ -17,8 +18,9 @@ function App() {
       <Route path="/songs" element={<Songs/>}/>
       <Route path="/seacreatures" element={<SeacreaturesPage/>}/>
       <Route path="/villagers" element={<Homepage/>}/>
-      <Route path="/villagers/filters/:filterQ" element={<Homepage/>}/>
-      <Route path="/singlevillager" element={<Singlevillager/>}/>
+      <Route path="/about" element={<AboutPage/>}/>
+      {/* <Route path="/villagers/filters/:filterQ" element={<Homepage/>}/>
+      <Route path="/singlevillager" element={<Singlevillager/>}/> */}
     </Routes>
     </Router>
   );
