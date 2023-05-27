@@ -1,4 +1,4 @@
-const url = 'http://acnhapi.com/v1a'
+const url = 'https://acnhapi.com/v1a'
 
 function getBugs(){
     return fetch(`${url}/bugs`)
