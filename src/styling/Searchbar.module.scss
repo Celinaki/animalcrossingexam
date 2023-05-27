@@ -9,5 +9,11 @@ width: 100%;
     padding: 0.8rem 1.5rem;
     border-style: none;
     background-color: rgb(200, 219, 219);
+
+    &:focus{
+        outline: 0.5px solid rgb(154, 180, 180);
+        box-shadow: rgba(43, 37, 27, 0.205) 1.95px 1.95px 2.6px;
+
+    }
 }
 }
