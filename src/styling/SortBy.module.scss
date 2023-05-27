@@ -25,7 +25,11 @@ height: auto;
     justify-content: space-between;
     border-radius: 25px;
     &:focus{
-        box-shadow: 3px 3px 10px 6px rgba(17, 66, 100, 0.06);
+        box-shadow: 1.95px 1.95px 2.6px rgba(17, 65, 100, 0.103);
+
+    }
+    &:active{
+      box-shadow: 1.95px 1.95px 2.6px rgba(17, 65, 100, 0.205);
 
     }
 }
