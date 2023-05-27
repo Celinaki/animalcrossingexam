@@ -11,6 +11,8 @@ import NorthIcon from '../assets/north.svg'
 import SouthIcon from '../assets/south.svg'
 import MoneyIcon from '../assets/money.svg'
 import checkPrice from '../functions/CheckPrice'
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 
 const BugCard = (bug) => {
@@ -90,9 +92,23 @@ const BugCard = (bug) => {
             </span>
             {
                 showMore === true ?
-                    <div className={style.back}>
-                        <span className={style.flexed}> <img src={MegaIcon} alt="" /><h2>Catchphrase: "{thebug["catch-phrase"]}"</h2></span>
-                        <span className={style.flexed}><img src={OwlIcon} alt="" /><h2>Museumphrase: {thebug["museum-phrase"]}</h2> </span>
+                    <div className={style.back}
+                        data-aos="fade-right"
+                        data-aos-delay="50"
+                        data-aos-easing="ease-in"
+                        data-aos-duaration="100"
+                    >
+
+                        <span className={style.flexed}
+                            data-aos="fade-right"
+                            data-aos-delay="100"
+                            data-aos-easing="ease-in"
+                            data-aos-duaration="100"> <img src={MegaIcon} alt="" /><h2>Catchphrase: "{thebug["catch-phrase"]}"</h2></span>
+                        <span className={style.flexed}
+                            data-aos="fade-right"
+                            data-aos-delay="200"
+                            data-aos-easing="ease-in"
+                            data-aos-duaration="100"><img src={OwlIcon} alt="" /><h2>Museumphrase: {thebug["museum-phrase"]}</h2> </span>
                     </div>
 
                     :

@@ -6,8 +6,10 @@ import Songs from './views/Songs'
 import Singlevillager from './views/Singlevillager';
 import QueryPage from './views/QueryPage';
 import SeacreaturesPage from './views/SeacreaturesPage';
+import Aos from 'aos';
 
 function App() {
+  Aos.init() 
   return (
     <Router>
     <Routes>

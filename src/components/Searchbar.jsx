@@ -5,6 +5,7 @@ const SearchBar = (props) => {
     const updateState = (val) =>{
         props.searchOnQuery(val)
     }
+    
     return(
 <div className={styles.searchholder}>
 <input className={styles.input}

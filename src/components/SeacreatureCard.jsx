@@ -11,6 +11,8 @@ import NorthIcon from '../assets/north.svg'
 import SouthIcon from '../assets/south.svg'
 import MoneyIcon from '../assets/money.svg'
 import checkPrice from '../functions/CheckPrice'
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 
 const SeacreatureCard = (seacreature) => {
@@ -53,7 +55,7 @@ const SeacreatureCard = (seacreature) => {
     const [isFlipped, setIsFlipped] = useState(false)
 
     return (
-        <div className={style.seacardwrapper}>
+        <div className={style.seacardwrapper} style={{minHeight:"580px"}}>
 
             <article className={style.iconholder}>
                 <img src={creature.image_uri} alt="The creature" />
@@ -84,11 +86,31 @@ const SeacreatureCard = (seacreature) => {
             </span>
             {
                 showMore === true ?
-                    <div className={style.back}>
-                        <span className={style.flexed}><img src={MegaIcon} alt="" /><h2>Catchphrase: "{creature["catch-phrase"]}"</h2></span>
-                        <span className={style.flexed}><img src={SpeedIcon} alt="" /><h2>Speed: {creature.speed}</h2> </span>
-                        <span className={style.flexed}><img src={ShadowIcon} alt="" /><h2>Shadow: {creature.shadow}</h2> </span>
-                        <span className={style.flexed}><img src={OwlIcon} alt="" /><h2>Museumphrase: {creature["museum-phrase"]}</h2> </span>
+                    <div className={style.back}
+                    data-aos="fade-right"
+                    data-aos-delay="50"
+                    data-aos-easing="ease-in"
+                    data-aos-duaration="100">
+                        <span className={style.flexed}
+                         data-aos="fade-right"
+                         data-aos-delay="100"
+                         data-aos-easing="ease-in"
+                         data-aos-duaration="100"><img src={MegaIcon} alt="" /><h2>Catchphrase: "{creature["catch-phrase"]}"</h2></span>
+                        <span className={style.flexed}
+                         data-aos="fade-right"
+                         data-aos-delay="200"
+                         data-aos-easing="ease-in"
+                         data-aos-duaration="100"><img src={SpeedIcon} alt="" /><h2>Speed: {creature.speed}</h2> </span>
+                        <span className={style.flexed}
+                         data-aos="fade-right"
+                         data-aos-delay="300"
+                         data-aos-easing="ease-in"
+                         data-aos-duaration="100"><img src={ShadowIcon} alt="" /><h2>Shadow: {creature.shadow}</h2> </span>
+                        <span className={style.flexed}
+                         data-aos="fade-right"
+                         data-aos-delay="400"
+                         data-aos-easing="ease-in"
+                         data-aos-duaration="100"><img src={OwlIcon} alt="" /><h2>Museumphrase: {creature["museum-phrase"]}</h2> </span>
                     </div>
 
                     :
