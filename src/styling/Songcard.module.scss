@@ -1,9 +1,12 @@
 .songcardwrapper {
     width: 85%;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    //box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+    background-color: rgb(250, 243, 235);
+    box-shadow: rgba(255, 166, 0, 0.205) 1.95px 1.95px 2.6px;
 
    p{
-    font-family: 'Open Sans';
+    font-family: 'Poppins';
+    // font-family: 'Open Sans';
     font-weight: 700;
    } 
 
@@ -32,6 +35,8 @@
         }
 
     }
+.textsection{
+padding-left:1rem ;
 
     .priceandimg {
         display: flex;
@@ -42,4 +47,5 @@
         }
 
     }
+}
 }

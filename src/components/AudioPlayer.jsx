@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Style from '../styling/AudioPlayer.module.scss';
 import { ImPause, ImPlay2 } from "react-icons/im";
+import { useLocation } from 'react-router-dom';
 
 
 
@@ -12,6 +13,7 @@ const AudioPlayer = ({ src, hover }) => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(1);
+  const location = useLocation();
 
   useEffect(() => {
     audio.volume = 0.4;
@@ -29,6 +31,8 @@ const AudioPlayer = ({ src, hover }) => {
     });
 
     return () => {
+      audio.pause();
+      audio.currentTime = 0;
       audio.removeEventListener('loadedmetadata', () => { });
       audio.removeEventListener('timeupdate', () => { });
       audio.removeEventListener('pause', () => { });
@@ -54,6 +58,16 @@ const AudioPlayer = ({ src, hover }) => {
     //setIsPlaying(!isPlaying);
     globalAudio = audio;
   };
+  
+  const unmountSong = () => {
+    if (isPlaying) {
+      audio.pause();
+      setIsPlaying(false);
+    } else {
+      audio.play();
+      setIsPlaying(true);
+    }
+  }
 
 
   const handleSeek = (e) => {
@@ -79,6 +93,8 @@ const AudioPlayer = ({ src, hover }) => {
     };
   }, []);
 
+
+
   return (
     <div 
     className={`${Style.audiowrapper} ${hover === false ? Style.audiohover : ''}`}
@@ -89,17 +105,18 @@ const AudioPlayer = ({ src, hover }) => {
     }
   >
 
-      <span className={Style.audioduration}> <button onClick={togglePlay}>
-        {isPlaying ? <ImPause /> :
+      <span className={Style.audioduration}>
+         <button onClick={()=>{ togglePlay();unmountSong()}}>
+          {isPlaying ? <ImPause /> :
           <ImPlay2 />}</button>
-        <p style={{ fontWeight: 600 }}>{Math.floor(currentTime)} </p>
+          <p style={{ fontWeight: 600 }}>{Math.floor(currentTime)} </p>
         <input
           type="range"
           min={0}
           max={duration}
           value={currentTime}
           onChange={handleSeek}
-          style={{ backgroundColor: "red", color: "red" }}
+          
         />
         <p style={{ fontWeight: 600 }}>{Math.floor(duration)}</p>
       </span>

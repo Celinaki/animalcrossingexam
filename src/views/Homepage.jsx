@@ -4,135 +4,55 @@ import Navbar from '../components/Navbar'
 import style from '../styling/Homepage.module.scss'
 import Villagercard from "../components/Villagercard";
 import { getVillagers } from "../api/villagers";
-import { getSongs } from "../api/songs";
 import Categories from "../components/Categories";
 import Filtering from "../modals/Filtering";
 import { useParams } from "react-router-dom";
 import Spinner from '../components/Spinner.jsx';
 import Songcard from "../components/Songcard";
 import NavWave from "../components/NavWave";
+import SearchBar from "../components/Searchbar";
+import ReactPaginate from "react-paginate";
+import globalStyle from '../App.css'
+import { forwardRef } from "react";
+import SortBy from "../components/SortBy";
 
 const Home = () => {
-  //Todos: Pagination, filtering
-  const [searchParams, setSearchParams] = useSearchParams();
 
-  //Array lists
-  const [alphVillagersList, setAlphVillagersList] = useState([])
-  const [genVillagersList, setGenVillagersList] = useState([])
   const [arrayList, setArrayList] = useState([])
-  const [narrayList, setnArrayList] = useState([])
   const villagerList = arrayList;
-  //Array lists
-
   const [loadingSpinner, setLoadingSpinner] = useState(false)
 
-
-
-
-  // const [filterQuery, setFilterQuery] = useState('')
-  // const handleFiltering = (f) => {
-  //   setFilterQuery(f)
-  //   console.log(filterQuery, "detta e filter query")
-  //   if (f === 'alph') {
-  //     return alphVillagersList
-  //   }
-  //   else if (f === 'gender') {
-
-  //   }
-  //   else return
-  // }
-
-  const [villagerPage, setVillagerPage] = useState(false)
-  const [displayedVillagers, setDisplayedVillagers] = useState([])
-  const { filterQ } = useParams()
-  const { villagers } = useParams()
-  //const {songs} = useParams()
-
-  // useEffect(() => {
-  //   console.log(villagers, "villagers params är false?")
-  //   if (villagers) {
-  //     setVillagerPage(true)
-  //     setTimeout(() => {
-  //       setLoadingSpinner(false)
-  //     }, 1300)
-  //     setLoadingSpinner(true)
-
-  //   }
-  //   if (filterQ === 'alph') {
-  //     console.log(villagerList, "här är villagerslist")
-  //     const sortedArray = alphVillagersList.sort((a, b) => {
-  //       if (a.name["name-USen"] < b.name["name-USen"]) {
-  //         return -1;
-  //       }
-  //       if (a.name["name-USen"] > b.name["name-USen"]) {
-  //         return 1;
-  //       }
-  //       return 0;
-  //     });
-  //     setDisplayedVillagers(sortedArray)
-  //     setTimeout(() => {
-  //       setLoadingSpinner(false)
-  //     }, 1300)
-  //     setLoadingSpinner(true)
-  //   }
-
-  //   else if (filterQ === 'Female' || filterQ === 'Male') {
-  //     setDisplayedVillagers(narrayList.filter(villager => villager.gender === filterQ))
-  //     setTimeout(() => {
-  //       setLoadingSpinner(false)
-  //     }, 1300)
-  //     setLoadingSpinner(true)
-  //   }
-  //   else
-  //     setDisplayedVillagers(narrayList)
-  //   setTimeout(() => {
-  //     setLoadingSpinner(false)
-  //   }, 1300)
-  //   setLoadingSpinner(true)
-  // }, [filterQ, narrayList, villagers])
-
-
-  const [songList, setSongList] = useState([])
 
   useEffect(() => {
     if (otherCriteria === false)
       getVillagers()
         .then(villagerData => setTheDisplayedList(villagerData))
 
-    // getVillagers()
-    //   .then(alphvillagerData => setAlphVillagersList(alphvillagerData))
-    // getSongs()
-    //   .then(songData => setSongList(songData))
-    // console.log(songList, "här e songdata ny")
-
   }, [])
+  //Needed
 
 
-
-
-  const [currentPage, setCurrentPage] = useState('villagers')
   const [theDisplayedList, setTheDisplayedList] = useState([])
 
   //Query from categories
-  const [query, setQuery] = useState('')
+
   const [otherCriteria, setOtherCriteria] = useState(false)
+
   const onUpdateQuery = (q, data) => {
-    setOtherCriteria(true)
-    setQuery(q)
-    setCurrentPage(q)
-    setTheDisplayedList(data)
-    setTimeout(() => {
-      setLoadingSpinner(false)
-    }, 1300)
-    setLoadingSpinner(true)
+    // setOtherCriteria(true)
+    // setTheDisplayedList(data)
+    // setTimeout(() => {
+    //   setLoadingSpinner(false)
+    // }, 1300)
+    // setLoadingSpinner(true)
   }
   //Query from categories
 
   //Query from filter
   const onUpdateFilter = (data) => {
 
-    setOtherCriteria(true)
-    console.log(data, "här är data från home")
+    //setOtherCriteria(true)
+   // console.log(data, "här är data från home")
     setTheDisplayedList(data)
     setTimeout(() => {
       setLoadingSpinner(false)
@@ -146,21 +66,46 @@ const Home = () => {
   useEffect(() => {
     if (search && typeof search === 'string') {
       setSearchArray(
-        theDisplayedList.filter(item =>
+        currentItems.filter(item =>
           item.name["name-USen"].toLowerCase().includes(search.toLowerCase()))
       )
     }
   }, [search, theDisplayedList])
 
+  const searchOnQuery = (e)=>{
+    console.log(e)
+    setSearch(e)
+  }
+
+  
+  const [currentItems, setCurrentItems] = useState([])
+  const [pageCount, setPageCount ] = useState(0)
+  const [itemOffset, setItemOffset] = useState(0)
+  const itemsPerPage = 16
+
+  useEffect(()=>{
+
+    const endOffset = itemOffset + itemsPerPage;
+    setCurrentItems(theDisplayedList.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(theDisplayedList.length / itemsPerPage));
+  }, [itemOffset, itemsPerPage, theDisplayedList]);
+
+  const handlePageClick = (event) =>{
+    const newOffset = (event.selected * itemsPerPage) %  theDisplayedList.length;
+    setItemOffset(newOffset)
+  }
   return (
     <>
       <Navbar />
       <NavWave />
+      <SearchBar searchOnQuery={searchOnQuery}/>        
+
       <section style={{ display: "flex", alignItems: "center" }}>
-        <Filtering onUpdatedFilter={onUpdateFilter}  />
+       
+        
         <Categories onChosenCat={onUpdateQuery} />
       </section>
-      <input type="text" onChange={(e) => setSearch(e.target.value)} />
+    
       <div className={style.homewrapper}>
         {loadingSpinner ? (
           <Spinner> </Spinner>
@@ -171,9 +116,26 @@ const Home = () => {
             <p>No results found for "{search}"</p>
           )
         ) : (
-          theDisplayedList.map(villager => <Villagercard villager={villager} />)
+          currentItems.map(villager => <Villagercard villager={villager} />)
         )}
       </div>
+      <ReactPaginate
+  breakLabel="..."
+  breakAriaLabels={{forward:'Jump forward 3 steps',backward:'Jump backward 3 steps'}}
+  nextLabel="Next"
+  onPageChange={handlePageClick}
+  pageRangeDisplayed={3}
+  marginPagesDisplayed={1}
+  pageCount={pageCount}
+  previousLabel="Previous"
+  renderOnZeroPageCount={null}
+  containerClassName="pagination"
+  pageLinkClassName="page-num"
+  previousLinkClassName=""
+  nextLinkClassName=""
+  activeLinkClassName="page-active"
+
+/>
     </>
 
   )

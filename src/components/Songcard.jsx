@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Howl } from 'howler';
 import AudioPlayer from './AudioPlayer';
 import checkPrice from '../functions/CheckPrice';
+import { useLocation } from 'react-router-dom';
 
 const Songcard = (song) => {
   const thesong = song.song;
@@ -26,6 +27,7 @@ const Songcard = (song) => {
 
       </section>
 
+<section className={styles.textsection}>
       <h2>{thesong.name["name-USen"]}</h2>
       <span className={styles.priceandimg}>
         {thesong['buy-price'] === null ?
@@ -49,7 +51,7 @@ const Songcard = (song) => {
             <img src={checkPrice(thesong['sell-price'])} alt="" />
           </>
         }
-      </span>
+      </span></section>
     </div>
   )
 }

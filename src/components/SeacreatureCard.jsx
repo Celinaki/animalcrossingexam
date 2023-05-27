@@ -50,97 +50,60 @@ const SeacreatureCard = (seacreature) => {
     }, [creature.availability["month-southern"]])
 
     const [showMore, setShowMore] = useState(false)
-    const [isFlipped,setIsFlipped] = useState(false)
+    const [isFlipped, setIsFlipped] = useState(false)
 
     return (
-
-    //     <div className={style.card} >
-	// 	<div className={`${style.cardInner} ${isFlipped ? style.isFlipped : ''} `} onClick={()=>setIsFlipped(!isFlipped)} >
-	// 		<div className={`${style.cardFace} ${style.cardFaceFront}`}>
-    //         <article className={style.iconholder}>
-    //                  <img src={creature.image_uri} alt="The creature" />
-    //             </article>
-    //              <h1>{creature.name["name-USen"].charAt(0).toUpperCase() + creature.name["name-USen"].slice(1)}</h1>
-    //              <span className={`${style.flexed}`}>
-    //                  <img src={ClockIcon} alt="" />
-    //                  {getTime(creature.availability["time"])}
-    //              </span>
-    //              <section className={style.monthsAndIcons}>
-    //                  <span className={`${style.flexed}`}>
-    //                      <img src={CalenderIcon} alt="" />
-    //                      {
-    //                          allMonths ? <h2>It's available all months of the year</h2> :
-    //                              <h2>Available during these months</h2>
-
-    //                      }
-    //                  </span>
-    //                  <span className={style.months}>
-    //                      {getMonths(creature.availability["month-southern"], creature.availability["month-northern"])}
-    //                  </span>
-    //              </section>
-    //              <span className={style.flexed}>
-    //                  <img src={MoneyIcon} alt="" />
-    //                  <h2>It goes for {creature.price}  </h2>
-    //                  <img src={checkPrice(creature.price)} alt="" />
-    //              </span>
-	// 		</div>
-	// 		<div className={`${style.cardFace}  ${style.cardFaceBack}`}>
-	// 			<div className={style.cardContent}>
-	// 				<div className={style.cardHeader}>
-						
-	// 					<h2>Tyler Potts</h2>
-	// 				</div>
-	// 				<div className={style.cardBody}>
-	// 					<h3>JavaScript Wizard</h3>
-	// 					<p>Lorem ipsum <strong>dolor</strong> sit amet, consectetur <strong>adipiscing</strong> elit. Sed id erat a magna lobortis dictum. Nunc est arcu, <strong>lacinia</strong> quis sapien placerat, <strong>laoreet</strong> tincidunt nulla.</p>
-	// 				</div>
-	// 			</div>
-	// 		</div>
-	// 	</div>
-	// </div>
         <div className={style.seacardwrapper}>
-            <section >
-                <article className={style.iconholder}>
-                    <img src={creature.image_uri} alt="The creature" />
-                </article>
+
+            <article className={style.iconholder}>
+                <img src={creature.image_uri} alt="The creature" />
                 <h1>{creature.name["name-USen"].charAt(0).toUpperCase() + creature.name["name-USen"].slice(1)}</h1>
+
+            </article>
+            <span className={`${style.flexed}`}>
+                <img src={ClockIcon} alt="" />
+                {getTime(creature.availability["time"])}
+            </span>
+            <section className={style.monthsAndIcons}>
                 <span className={`${style.flexed}`}>
-                    <img src={ClockIcon} alt="" />
-                    {getTime(creature.availability["time"])}
-                </span>
-                <section className={style.monthsAndIcons}>
-                    <span className={`${style.flexed}`}>
-                        <img src={CalenderIcon} alt="" />
-                        {
-                            allMonths ? <h2>It's available all months of the year</h2> :
-                                <h2>Available during these months</h2>
+                    <img src={CalenderIcon} alt="" />
+                    {
+                        allMonths ? <h2>It's available all months of the year</h2> :
+                            <h2>Available during these months</h2>
 
-                        }
-                    </span>
-                    <span className={style.months}>
-                        {getMonths(creature.availability["month-southern"], creature.availability["month-northern"])}
-                    </span>
-                </section>
-                <span className={style.flexed}>
-                    <img src={MoneyIcon} alt="" />
-                    <h2>It goes for {creature.price}  </h2>
-                    <img src={checkPrice(creature.price)} alt="" />
+                    }
                 </span>
-                {
-                    showMore === true ?
-                        <div className={style.back}>
-                            <span className={style.flexed}> <img src={MegaIcon} alt="" /><h2>Catchphrase: "{creature["catch-phrase"]}"</h2></span>
-                            <span className={style.flexed}><img src={SpeedIcon} alt="" /><h2>Speed: {creature.speed}</h2> </span>
-                            <span className={style.flexed}><img src={ShadowIcon} alt="" /><h2>Shadow: {creature.shadow}</h2> </span>
-                            <span className={style.flexed}><img src={OwlIcon} alt="" /><h2>Museumphrase: {creature["museum-phrase"]}</h2> </span>
-                        </div>
-                   
-                        :
-                        ''
-                }
-                <h1 onClick={()=>setShowMore(!showMore)}> {showMore ? 'Show less' : 'Show more'}</h1>
-
+                <span className={style.months}>
+                    {getMonths(creature.availability["month-southern"], creature.availability["month-northern"])}
+                </span>
             </section>
+            <span className={style.flexed}>
+                <img src={MoneyIcon} alt="" />
+                <h2>It goes for {creature.price}  </h2>
+                <img src={checkPrice(creature.price)} alt="" />
+            </span>
+            {
+                showMore === true ?
+                    <div className={style.back}>
+                        <span className={style.flexed}><img src={MegaIcon} alt="" /><h2>Catchphrase: "{creature["catch-phrase"]}"</h2></span>
+                        <span className={style.flexed}><img src={SpeedIcon} alt="" /><h2>Speed: {creature.speed}</h2> </span>
+                        <span className={style.flexed}><img src={ShadowIcon} alt="" /><h2>Shadow: {creature.shadow}</h2> </span>
+                        <span className={style.flexed}><img src={OwlIcon} alt="" /><h2>Museumphrase: {creature["museum-phrase"]}</h2> </span>
+                    </div>
+
+                    :
+                    ''
+            }
+            <button className={style.togglebutton}
+                onClick={() => setShowMore(!showMore)}>
+                {showMore ? 'SHOW LESS' : 'SHOW MORE'}
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+
 
 
         </div>

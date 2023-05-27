@@ -2,14 +2,18 @@
 .villagercard{
     width: 85%;
     // border: 3px solid #D78A46 ;
-    box-shadow: rgba(80, 54, 25, 0.267) 0px 5px 15px;  
+    //box-shadow: rgba(255, 166, 0, 0.205) 0px 5px 15px;  
+   // box-shadow: rgba(80, 54, 25, 0.267) 0px 5px 15px;  
+
       border-radius: 12px;
     // box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    min-height:20rem ;
+    min-height:100% ;
     align-items: center;
     padding: 1.2rem 0rem 2rem 0rem;
+    background-color: rgb(250, 243, 235);
+   box-shadow: rgba(255, 166, 0, 0.205) 1.95px 1.95px 2.6px;
     section{
         display: flex;
         flex-direction: column;

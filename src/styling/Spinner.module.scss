@@ -1,13 +1,17 @@
-$spinncolor: #D5D4FF;
-$spinborder:#a2a1e0; 
+$spinncolor: #ffa500;
+$spinborder:#b97b07; 
 
 .spinnerbody{
-    width: 100%;
+    width: 80%;
+    height: 100%;
     display: flex;
+    margin: auto;
     justify-content: center;
-    position: absolute;
     left: 2vw;
-    top: 5rem;
+    padding: 5rem 0rem;
+    grid-column: span 4; 
+    text-align: center;
+    
     
 }
 .loadspinner {

@@ -3,11 +3,12 @@ import { NavLink } from 'react-router-dom';
 import { getVillagers } from '../api/villagers';
 import { useState } from 'react';
 import { getSongs } from '../api/songs';
+import { useLocation } from 'react-router-dom';
 
 //{onChosenQuery}
 const Categories = (props) => {
 const [renderedList, setRenderedList] = useState([])
-
+const location = useLocation()
 
 const fetchChosen = (q) => {
     if(q==='villagers'){
@@ -33,7 +34,7 @@ const fetchChosen = (q) => {
         <div className={style.categorieswrap}>
 <ul className={style.listitems}>
    <NavLink to={`/villagers`}>
-     <li onClick={()=>{fetchChosen('villagers')}}>
+     <li onClick={()=>{fetchChosen('villagers'); }}>
         - VILLAGERS -
     </li>
     </NavLink>

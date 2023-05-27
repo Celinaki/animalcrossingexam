@@ -2,41 +2,42 @@ import { useState, useEffect, React } from "react";
 import { useSearchParams } from "react-router-dom";
 import Navbar from '../components/Navbar'
 import style from '../styling/Homepage.module.scss'
-import { getSeacreatures } from "../api/seacreatures";
+import { getBugs } from "../api/bugs";
 import Categories from "../components/Categories";
 import Filtering from "../modals/Filtering";
 import { useParams } from "react-router-dom";
 import Spinner from '../components/Spinner.jsx';
 import NavWave from "../components/NavWave";
-import SeacreatureCard from "../components/SeacreatureCard";
 import SearchBar from "../components/Searchbar";
+import BugCard from "../components/Bugcard";
 import ReactPaginate from "react-paginate";
 import globalStyle from '../App.css'
 import SortBy from "../components/SortBy";
 
-const SeacreaturesPage = () => {
+const Home = () => {
   //Todos: Pagination, filtering
   const [searchParams, setSearchParams] = useSearchParams();
 
   //Array lists
+
+  const [arrayList, setArrayList] = useState([])
   //Array lists
 
   const [loadingSpinner, setLoadingSpinner] = useState(false)
+  const { filterQ } = useParams()
+
+
+
   const [theDisplayedList, setTheDisplayedList] = useState([])
 
   useEffect(() => {
-    getSeacreatures()
-    .then((data) => {
-    setTheDisplayedList(data) 
-    console.log(theDisplayedList)
-    })
-    setTimeout(() => {
-        setLoadingSpinner(false)
-      }, 1300)
-      setLoadingSpinner(true)
+    if (otherCriteria === false)
+      getBugs()
+        .then(bugsData => setTheDisplayedList(bugsData))
+console.log(theDisplayedList, "bugsdata är här")
 
 
-  }, [])
+  }, [theDisplayedList])
 
 
 
@@ -57,7 +58,6 @@ const SeacreaturesPage = () => {
   //Query from categories
 
   //Query from filter
-
   const onUpdateFilter = (data) => {
     setOtherCriteria(true)
     console.log(data, "här är data från home")
@@ -67,7 +67,6 @@ const SeacreaturesPage = () => {
     }, 1300)
     setLoadingSpinner(true)
   }
-  
   //Query from filter
 
   const [search, setSearch] = useState('')
@@ -86,6 +85,7 @@ const SeacreaturesPage = () => {
     setSearch(e)
   }
 
+
   const [currentItems, setCurrentItems] = useState([])
   const [pageCount, setPageCount ] = useState(0)
   const [itemOffset, setItemOffset] = useState(0)
@@ -103,33 +103,46 @@ const SeacreaturesPage = () => {
     setItemOffset(newOffset)
   }
  
+
   return (
     <>
       <Navbar />
       <NavWave />
       <SearchBar searchOnQuery={searchOnQuery}/>
-
       <section style={{ display: "flex", alignItems: "center" }}>
-        
-        
-        <Categories onChosenCat={onUpdateQuery} />
+        <Categories onChosenCat={onUpdateQuery}/>
       </section>
       <span className={style.sortingholder}>
         <SortBy onUpdatedFilter={onUpdateFilter} fromPage={'bugPage'}/>
       </span>
-      {/* <input type="text" onChange={(e) => setSearch(e.target.value)} /> */}
       <div className={style.homewrapper}>
+
         {loadingSpinner ? (
           <Spinner> </Spinner>
         ) : search !== '' ? (
           searchArray.length > 0 ? (
-            searchArray.map(creature => <SeacreatureCard creature={creature} />)
+            searchArray.map(bug => <BugCard bug={bug} />)
           ) : (
             <p>No results found for "{search}"</p>
           )
         ) : (
-          currentItems.map(creature => <SeacreatureCard creature={creature} />)
-        )}
+          currentItems.map(bug => <BugCard bug={bug} />)
+        )} 
+
+
+
+
+        {/* {loadingSpinner ? (
+          <Spinner> </Spinner>
+        ) : search !== '' ? (
+          searchArray.length > 0 ? (
+            searchArray.map(bug => <BugCard bug={bug} />)
+          ) : (
+            <p>No results found for "{search}"</p>
+          )
+        ) : (
+          theDisplayedList.map(bug => <BugCard bug={bug} />)
+        )} */}
       </div>
       <ReactPaginate
   breakLabel="..."
@@ -151,4 +164,4 @@ const SeacreaturesPage = () => {
   )
 }
 
-export default SeacreaturesPage 
+export default Home 
