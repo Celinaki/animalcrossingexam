@@ -60,16 +60,7 @@ const Home = () => {
   }
   //Query from filter
 
-  const [search, setSearch] = useState('')
-  const [searchArray, setSearchArray] = useState([])
-  useEffect(() => {
-    if (search && typeof search === 'string') {
-      setSearchArray(
-        currentItems.filter(item =>
-          item.name["name-USen"].toLowerCase().includes(search.toLowerCase()))
-      )
-    }
-  }, [search, theDisplayedList])
+
 
   const searchOnQuery = (e) => {
     console.log(e)
@@ -92,7 +83,18 @@ const Home = () => {
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % theDisplayedList.length;
     setItemOffset(newOffset)
-  }
+  } 
+  
+  const [search, setSearch] = useState('')
+  const [searchArray, setSearchArray] = useState([])
+  useEffect(() => {
+    if (search && typeof search === 'string') {
+      setSearchArray(
+        currentItems.filter(item =>
+          item.name["name-USen"].toLowerCase().includes(search.toLowerCase()))
+      )
+    }
+  }, [search, theDisplayedList])
   return (
     <>
       <Navbar />
@@ -117,7 +119,7 @@ const Home = () => {
             <p>No results found for "{search}"</p>
           )
         ) : (
-          currentItems.map(villager => <Villagercard villager={villager} />)
+          currentItems.map(villager => <Villagercard key={villager.id} villager={villager} />)
         )}
       </div>
       <ReactPaginate

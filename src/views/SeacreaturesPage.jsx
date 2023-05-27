@@ -121,12 +121,12 @@ const SeacreaturesPage = () => {
           <Spinner> </Spinner>
         ) : search !== '' ? (
           searchArray.length > 0 ? (
-            searchArray.map(creature => <SeacreatureCard creature={creature} />)
+            searchArray.map(creature => <SeacreatureCard   key={creature.id} creature={creature} />)
           ) : (
             <p>No results found for "{search}"</p>
           )
         ) : (
-          currentItems.map(creature => <SeacreatureCard creature={creature} />)
+          currentItems.map(creature => <SeacreatureCard  key={creature.id} creature={creature} />)
         )}
       </div>
       <ReactPaginate

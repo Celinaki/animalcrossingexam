@@ -115,12 +115,12 @@ const Songs = () => {
           <Spinner> </Spinner>
         ) : search !== '' ? (
           searchArray.length > 0 ? (
-            searchArray.map(song => <Songcard song={song} />)
+            searchArray.map(song => <Songcard  key={song.id} song={song} />)
           ) : (
             <p>No results found for "{search}"</p>
           )
         ) : (
-          currentItems.map(song => <Songcard song={song} />)
+          currentItems.map(song => <Songcard  key={song.id} song={song} />)
         )}
       </div>
       <ReactPaginate
