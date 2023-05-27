@@ -12,6 +12,7 @@ import globalStyle from '../App.css'
 import { forwardRef } from "react";
 import SortBy from "../components/SortBy";
 import GenderFilter from "../components/Genderfilter";
+import Footer from "../components/Footer";
 
 
 const Home = () => {
@@ -134,8 +135,10 @@ const Home = () => {
         previousLinkClassName=""
         nextLinkClassName=""
         activeLinkClassName="page-active"
-
       />
+<Footer>
+  
+</Footer>
     </>
 
   )
