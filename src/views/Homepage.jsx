@@ -1,4 +1,4 @@
-import { useState, useEffect, React } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from '../components/Navbar'
 import style from '../styling/Homepage.module.scss'
 import Villagercard from "../components/Villagercard";
@@ -9,92 +9,77 @@ import NavWave from "../components/NavWave";
 import SearchBar from "../components/Searchbar";
 import ReactPaginate from "react-paginate";
 import globalStyle from '../App.css'
-import { forwardRef } from "react";
 import SortBy from "../components/SortBy";
 import GenderFilter from "../components/Genderfilter";
 import Footer from "../components/Footer";
 
 
 const Home = () => {
-
-  const [arrayList, setArrayList] = useState([])
-  const villagerList = arrayList;
-  const [loadingSpinner, setLoadingSpinner] = useState(false)
-
-
-  useEffect(() => {
-    if (otherCriteria === false)
-      getVillagers()
-        .then(villagerData => setTheDisplayedList(villagerData))
-
-  }, [])
-  //Needed
-
-
-  const [theDisplayedList, setTheDisplayedList] = useState([])
-
-  //Query from categories
-
-  const [otherCriteria, setOtherCriteria] = useState(false)
-
-  const onUpdateQuery = (q, data) => {
-    // setOtherCriteria(true)
-    // setTheDisplayedList(data)
-    // setTimeout(() => {
-    //   setLoadingSpinner(false)
-    // }, 1300)
-    // setLoadingSpinner(true)
-  }
-  //Query from categories
-
-  //Query from filter
-  const onUpdateFilter = (data) => {
-
-    //setOtherCriteria(true)
-    // console.log(data, "här är data från home")
-    setTheDisplayedList(data)
-    setTimeout(() => {
-      setLoadingSpinner(false)
-    }, 1300)
-    setLoadingSpinner(true)
-  }
-  //Query from filter
-
-
-
-  const searchOnQuery = (e) => {
-    console.log(e)
-    setSearch(e)
-  }
-
-
-  const [currentItems, setCurrentItems] = useState([])
-  const [pageCount, setPageCount] = useState(0)
-  const [itemOffset, setItemOffset] = useState(0)
-  const itemsPerPage = 16
+  const [arrayList, setArrayList] = useState([]);
+  const [loadingSpinner, setLoadingSpinner] = useState(false);
+  const [theDisplayedList, setTheDisplayedList] = useState([]);
+  const [search, setSearch] = useState('');
+  const [searchArray, setSearchArray] = useState([]);
+  const [gendersQuery, setGenderQuery] = useState('');
+  const [currentItems, setCurrentItems] = useState([]);
+  const [pageCount, setPageCount] = useState(0);
+  const [itemOffset, setItemOffset] = useState(0);
+  const itemsPerPage = 16;
 
   useEffect(() => {
+    if (search !== '') {
+      setSearchArray(theDisplayedList.filter(item =>
+        item.name["name-USen"].toLowerCase().includes(search.toLowerCase())
+      ));
+    } else {
+      setSearchArray([]);
+    }
+    setItemOffset(0);
+  }, [search, theDisplayedList]);
 
+  useEffect(() => {
+    setLoadingSpinner(true);
+    getVillagers()
+      .then(villagerData => {
+        setArrayList(villagerData);
+        setTheDisplayedList(villagerData);
+        setLoadingSpinner(false);
+      });
+  }, []);
+
+  useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
-    setCurrentItems(theDisplayedList.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(theDisplayedList.length / itemsPerPage));
-  }, [itemOffset, itemsPerPage, theDisplayedList]);
+    setCurrentItems(search !== '' ? searchArray.slice(itemOffset, endOffset) : theDisplayedList.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil((search !== '' ? searchArray.length : theDisplayedList.length) / itemsPerPage));
+  }, [itemOffset, itemsPerPage, search, searchArray, theDisplayedList]);
 
   const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % theDisplayedList.length;
-    setItemOffset(newOffset)
-  } 
-  
-  const [search, setSearch] = useState('')
-  const [searchArray, setSearchArray] = useState([])
+    const newOffset = event.selected * itemsPerPage;
+    setItemOffset(newOffset);
+  };
+
+  const onUpdateQuery = (q, data) => {
+    setTheDisplayedList(data);
+    setSearch('');
+  };
+
+  const onUpdateFilter = (data) => {
+    setTheDisplayedList(data);
+    setSearch('');
+  };
+
+  const searchOnQuery = (e) => {
+    setSearch(e);
+  };
+
+  const assignedGenderQuery = (q) => {
+    setGenderQuery(q);
+  };
+
   useEffect(() => {
-    if (search && typeof search === 'string') {
-      setSearchArray(
-        currentItems.filter(item =>
-          item.name["name-USen"].toLowerCase().includes(search.toLowerCase()))
-      )
-    }
-  }, [search, theDisplayedList])
+    assignedGenderQuery(gendersQuery);
+  }, [gendersQuery]);
+
   return (
     <>
       <Navbar />
@@ -104,24 +89,28 @@ const Home = () => {
       </section>
       <SearchBar searchOnQuery={searchOnQuery} />
       <span className={style.sortingholderhome}>
-        <GenderFilter onUpdatedFilter={onUpdateFilter} />
-
-        <SortBy onUpdatedFilter={onUpdateFilter} fromPage={'villagerPage'} />
+        <GenderFilter onUpdatedFilter={onUpdateFilter} genderQuery={assignedGenderQuery} />
+        <SortBy 
+        onUpdatedFilter={onUpdateFilter} 
+        fromPage={'villagerPage'}
+        gender={gendersQuery} />
       </span>
 
       <div className={style.homewrapper}>
         {loadingSpinner ? (
           <Spinner> </Spinner>
-        ) : search !== '' ? (
-          searchArray.length > 0 ? (
-            searchArray.map(villager => <Villagercard villager={villager} />)
-          ) : (
-            <p>No results found for "{search}"</p>
-          )
         ) : (
-          currentItems.map(villager => <Villagercard key={villager.id} villager={villager} />)
+          <>
+            {search !== '' && currentItems.length === 0 && (
+              <p>No results found for "{search}"</p>
+            )}
+            {currentItems.map(villager => (
+              <Villagercard key={villager.id} villager={villager} />
+            ))}
+          </>
         )}
       </div>
+
       <ReactPaginate
         breakLabel="..."
         breakAriaLabels={{ forward: 'Jump forward 3 steps', backward: 'Jump backward 3 steps' }}
@@ -138,12 +127,10 @@ const Home = () => {
         nextLinkClassName=""
         activeLinkClassName="page-active"
       />
-<Footer>
-  
-</Footer>
+
+      <Footer />
     </>
+  );
+};
 
-  )
-}
-
-export default Home 
+export default Home;

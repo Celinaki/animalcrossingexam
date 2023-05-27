@@ -14,7 +14,9 @@ const SortBy = (props) => {
     const [originalSea, setOriginalSea] = useState([])
     const [originalBug, setOriginalBug] = useState([])
     const [originalVillagers, setOriginalVillagers] = useState([])
+    useEffect(() => {
 
+    }, [selected])
     //Click outside div closes the modal
     const referens = useRef(null)
     useEffect(() => {
@@ -49,6 +51,9 @@ const SortBy = (props) => {
                 .then((bugdata => {
                     setOriginalBug(bugdata)
                 }))
+        }
+        if(props.gender === 'Reset'){
+            setSelected('Sort by')
         }
     }, [originalVillagers,])
     const [passedArray, setPassedArray] = useState([])
@@ -130,26 +135,53 @@ const SortBy = (props) => {
             }
 
         }
-        else if (props.fromPage == 'villagerPage') {
-            if (q === 'Alph') {
-                const sortedArray = [...originalVillagers].sort((a, b) => {
-                    const nameA = a.name["name-USen"].toLowerCase();
-                    const nameB = b.name["name-USen"].toLowerCase();
-                    if (nameA < nameB) {
-                        return -1;
-                    }
-                    if (nameA > nameB) {
-                        return 1;
-                    }
-                    return 0;
-                });
-                setPassedArray(sortedArray)
-                return props.onUpdatedFilter(passedArray)
+        else if (props.fromPage === 'villagerPage') {
 
+            if (q === 'Alph') {
+                if (props.gender === 'Female') {
+                    const femaleArray = originalVillagers.filter(villager => villager.gender === 'Female');
+                    const sortedArray = femaleArray.sort((a, b) => a.name["name-USen"].toLowerCase().localeCompare(b.name["name-USen"].toLowerCase()));
+                    setPassedArray(sortedArray);
+                    return props.onUpdatedFilter(sortedArray);
+                } else if (props.gender === 'Male') {
+                    const maleArray = originalVillagers.filter(villager => villager.gender === 'Male');
+                    const sortedArray = maleArray.sort((a, b) => a.name["name-USen"].toLowerCase().localeCompare(b.name["name-USen"].toLowerCase()));
+                    setPassedArray(sortedArray);
+                    return props.onUpdatedFilter(sortedArray);
+                }
+
+                else if (props.gender === 'Reset') {
+                    const sortedArray = [...originalVillagers].sort((a, b) => a.name["name-USen"].toLowerCase().localeCompare(b.name["name-USen"].toLowerCase()));
+                    setPassedArray(sortedArray);
+                    setSelected('Sort by')
+
+                    return props.onUpdatedFilter(sortedArray);
+                }
+                else {
+                    const sortedArray = [...originalVillagers].sort((a, b) => a.name["name-USen"].toLowerCase().localeCompare(b.name["name-USen"].toLowerCase()));
+                    setPassedArray(sortedArray);
+                    setSelected('Sort by')
+                    return props.onUpdatedFilter(sortedArray);
+                }
+            }
+            else if (props.gender === 'Reset') {
+                setSelected('Sort by')
             }
             else if (q === 'Reset') {
-                setPassedArray(originalVillagers)
-                return props.onUpdatedFilter(passedArray)
+                if (props.gender === 'Female') {
+                    const femaleArray = originalVillagers.filter(villager => villager.gender === 'Female');
+                    setPassedArray(femaleArray);
+                    return props.onUpdatedFilter(femaleArray);
+                } else if (props.gender === 'Male') {
+                    const maleArray = originalVillagers.filter(villager => villager.gender === 'Male');
+                    setPassedArray(maleArray);
+                    return props.onUpdatedFilter(maleArray);
+                } else {
+                    setPassedArray(originalVillagers);
+                    return props.onUpdatedFilter(originalVillagers);
+                }
+            } else {
+                // Handle other cases or fallback logic
             }
         }
 
@@ -168,66 +200,66 @@ const SortBy = (props) => {
                     sort
                 </span>
             </button>
-     
-  {isActive && (
-    <ul className={styles.dropdownContent}>
-      <li
-        className={styles.dropitem}
-        onClick={() => {
-          setIsActive(false);
-          setSelected('Alphabetical');
-          setFilteredArray('Alph');
-        }}
-      >
-        Alphabetical
-      </li>
 
-      {props.fromPage === 'villagerPage' ? (
-        <li
-          className={styles.dropitem}
-          onClick={() => {
-            setIsActive(false);
-            setSelected('Sort by');
-            setFilteredArray('Reset');
-          }}
-        >
-          Reset
-        </li>
-      ) : (
-        <>
-          <li
-            className={styles.dropitem}
-            onClick={() => {
-              setIsActive(false);
-              setSelected('Price low to high');
-              setFilteredArray('Lp');
-            }}
-          >
-            Price low to high
-          </li>
-          <li
-            className={styles.dropitem}
-            onClick={() => {
-              setIsActive(false);
-              setSelected('Price high to low');
-              setFilteredArray('Hp');
-            }}
-          >
-            Price high to low
-          </li>
-          <li
-            className={styles.dropitem}
-            onClick={() => {
-              setIsActive(false);
-              setSelected('Sort by');
-              setFilteredArray('Reset');
-            }}
-          >
-            Reset
-          </li>
-        </>
-      )}
-    </ul>
+            {isActive && (
+                <ul className={styles.dropdownContent}>
+                    <li
+                        className={styles.dropitem}
+                        onClick={() => {
+                            setIsActive(false);
+                            setSelected('Alphabetical');
+                            setFilteredArray('Alph');
+                        }}
+                    >
+                        Alphabetical
+                    </li>
+
+                    {props.fromPage === 'villagerPage' ? (
+                        <li
+                            className={styles.dropitem}
+                            onClick={() => {
+                                setIsActive(false);
+                                setSelected('Sort by');
+                                setFilteredArray('Reset');
+                            }}
+                        >
+                            Reset
+                        </li>
+                    ) : (
+                        <>
+                            <li
+                                className={styles.dropitem}
+                                onClick={() => {
+                                    setIsActive(false);
+                                    setSelected('Price low to high');
+                                    setFilteredArray('Lp');
+                                }}
+                            >
+                                Price low to high
+                            </li>
+                            <li
+                                className={styles.dropitem}
+                                onClick={() => {
+                                    setIsActive(false);
+                                    setSelected('Price high to low');
+                                    setFilteredArray('Hp');
+                                }}
+                            >
+                                Price high to low
+                            </li>
+                            <li
+                                className={styles.dropitem}
+                                onClick={() => {
+                                    setIsActive(false);
+                                    setSelected('Sort by');
+                                    setFilteredArray('Reset');
+                                }}
+                            >
+                                Reset
+                            </li>
+                        </>
+                    )}
+                </ul>
             )}
         </div>
     )

@@ -18,6 +18,7 @@ const GenderFilter = (props) => {
             filteredArray = originalVillagers;
         }
         setPassedArray(filteredArray);
+        props.genderQuery(q)
         props.onUpdatedFilter(filteredArray);
         setActiveButton(q);
     };
