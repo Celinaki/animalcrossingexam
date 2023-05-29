@@ -52,13 +52,13 @@ const SortBy = (props) => {
                     setOriginalBug(bugdata)
                 }))
         }
-        if(props.gender === 'Reset'){
+        if (props.gender === 'Reset') {
             setSelected('Sort by')
         }
     }, [originalVillagers,])
     const [passedArray, setPassedArray] = useState([])
 
-    
+
     const setFilteredArray = (q) => {
 
         if (props.fromPage == 'seaPage') {
@@ -145,7 +145,7 @@ const SortBy = (props) => {
                     const sortedArray = femaleArray.sort((a, b) => a.name["name-USen"].toLowerCase().localeCompare(b.name["name-USen"].toLowerCase()));
                     setPassedArray(sortedArray);
                     return props.onUpdatedFilter(sortedArray);
-                } 
+                }
                 else if (props.gender === 'Male') {
                     const maleArray = originalVillagers.filter(villager => villager.gender === 'Male');
                     const sortedArray = maleArray.sort((a, b) => a.name["name-USen"].toLowerCase().localeCompare(b.name["name-USen"].toLowerCase()));
@@ -160,16 +160,68 @@ const SortBy = (props) => {
 
                     return props.onUpdatedFilter(sortedArray);
                 }
+                else if (props.gender === 'Reset') {
+                    setSelected('Sort by')
+                }
                 else {
                     const sortedArray = [...originalVillagers].sort((a, b) => a.name["name-USen"].toLowerCase().localeCompare(b.name["name-USen"].toLowerCase()));
                     setPassedArray(sortedArray);
                     setSelected('Alphabetical')
                     return props.onUpdatedFilter(sortedArray);
                 }
+
             }
-            else if (props.gender === 'Reset') {
-                setSelected('Sort by')
+
+            else if (q === 'Birthday') {
+                if (props.gender === 'Female') {
+                    const femaleArray = originalVillagers.filter(villager => villager.gender === 'Female');
+                    const sortedArray = femaleArray.sort((a, b) => {
+                        const [aDay, aMonth] = a.birthday.split('/');
+                        const [bDay, bMonth] = b.birthday.split('/');
+
+                        if (aMonth !== bMonth) {
+                            return aMonth - bMonth;
+                        }
+
+                        return aDay - bDay;
+                    });
+                    setPassedArray(sortedArray);
+                    return props.onUpdatedFilter(sortedArray);
+                }
+                else if (props.gender === 'Male') {
+                    const maleArray = originalVillagers.filter(villager => villager.gender === 'Male');
+                    const sortedArray = maleArray.sort((a, b) => {
+                        const [aDay, aMonth] = a.birthday.split('/');
+                        const [bDay, bMonth] = b.birthday.split('/');
+
+                        if (aMonth !== bMonth) {
+                            return aMonth - bMonth;
+                        }
+
+                        return aDay - bDay;
+                    });
+                    setPassedArray(sortedArray);
+                    return props.onUpdatedFilter(sortedArray);
+                }
+                else if (props.gender === 'Reset') {
+                    setSelected('Sort by')
+                }
+                else {
+                    const sortedArray = originalVillagers.sort((a, b) => {
+                        const [aDay, aMonth] = a.birthday.split('/');
+                        const [bDay, bMonth] = b.birthday.split('/');
+
+                        if (aMonth !== bMonth) {
+                            return aMonth - bMonth;
+                        }
+
+                        return aDay - bDay;
+                    });
+                    setPassedArray(sortedArray);
+                    return props.onUpdatedFilter(sortedArray);
+                }
             }
+
             else if (q === 'Reset') {
                 if (props.gender === 'Female') {
                     const femaleArray = originalVillagers.filter(villager => villager.gender === 'Female');
@@ -184,7 +236,7 @@ const SortBy = (props) => {
                     return props.onUpdatedFilter(originalVillagers);
                 }
             } else {
-               
+
             }
         }
 
@@ -218,16 +270,27 @@ const SortBy = (props) => {
                     </li>
 
                     {props.fromPage === 'villagerPage' ? (
-                        <li
-                            className={styles.dropitem}
-                            onClick={() => {
-                                setIsActive(false);
-                                setSelected('Sort by');
-                                setFilteredArray('Reset');
-                            }}
-                        >
-                            Reset
-                        </li>
+                        <>
+                            <li
+                                className={styles.dropitem}
+                                onClick={() => {
+                                    setIsActive(false);
+                                    setSelected('Birthday');
+                                    setFilteredArray('Birthday');
+                                }}
+                            >
+                                Birthday
+                            </li>
+                            <li
+                                className={styles.dropitem}
+                                onClick={() => {
+                                    setIsActive(false);
+                                    setSelected('Sort by');
+                                    setFilteredArray('Reset');
+                                }}
+                            >
+                                Reset
+                            </li></>
                     ) : (
                         <>
                             <li
