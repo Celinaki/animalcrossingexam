@@ -4,8 +4,15 @@ import Categories from "../components/Categories"
 import Footer from "../components/Footer"
 import Aos from "aos"
 import style from '../styling/AboutPage.module.scss'
+import { useEffect } from "react"
 const AboutPage = () =>{
-
+useEffect(()=>{
+  
+    window.scrollTo({
+      top: 300,
+      behavior: 'smooth' 
+    });
+})
     return(
     <>
        <Navbar/>
