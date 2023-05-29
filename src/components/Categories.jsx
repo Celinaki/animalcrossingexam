@@ -30,20 +30,13 @@ const fetchChosen = (q) => {
 //     }
  }
 
- const reloadPage= ( ) =>{
-  if (window.location.pathname === '/villagers' || window.location.pathname === '/') {
+ const reloadPage = (path) => {
+  if (window.location.pathname === path || window.location.pathname === '/') {
     window.location.reload();
+  } else {
+    window.location.href = path;
   }
-  else if (window.location.pathname === '/songs' ) {
-    window.location.reload();
-  }
-  else if (window.location.pathname === '/seacreatures' ) {
-    window.location.reload();
-  }
-  else if (window.location.pathname === '/bugs' ) {
-    window.location.reload();
-  }
- }
+};
 
     return (
         <div className={style.categorieswrap}>
@@ -51,25 +44,25 @@ const fetchChosen = (q) => {
    <NavLink to={`/villagers`}
       style={({ isActive }) => ({ background: isActive ? 'rgb(222 184 135 / 61%)' : '' })}>
      <li 
-     onClick={()=>{fetchChosen('villagers'); reloadPage()}}>
+     onClick={()=>{fetchChosen('villagers'); reloadPage('/villagers')}}>
         - VILLAGERS -
     </li>
     </NavLink>
     <NavLink to={`/songs`}
       style={({ isActive }) => ({ background: isActive ? 'rgb(222 184 135 / 61%)' : '' })}>
-    <li onClick={()=>{fetchChosen('songs');reloadPage()}}>
+    <li onClick={()=>{fetchChosen('songs'); reloadPage('/songs')}}>
         - SONGS -
     </li>    
     </NavLink>
     <NavLink to={`/seacreatures`}
       style={({ isActive }) => ({ background: isActive ? 'rgb(222 184 135 / 61%)' : '' })}>
-    <li onClick={()=>{fetchChosen('seacreatures');reloadPage()}}>
+    <li onClick={()=>{fetchChosen('seacreatures'); reloadPage('/seacreatures')}}>
         - SEARCREATURES -
     </li>
     </NavLink>
     <NavLink to={`/bugs`}
       style={({ isActive }) => ({ background: isActive ? 'rgb(222 184 135 / 61%)' : '' })}>
-    <li onClick={()=>{fetchChosen('bugs');reloadPage()}}>
+    <li onClick={()=>{fetchChosen('bugs'); reloadPage('/bugs')}}>
         - BUGS -
     </li>
     </NavLink>
