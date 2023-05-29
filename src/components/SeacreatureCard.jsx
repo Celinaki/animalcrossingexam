@@ -49,7 +49,12 @@ const SeacreatureCard = (seacreature) => {
     const [isFlipped, setIsFlipped] = useState(false)
 
     return (
-        <div className={style.seacardwrapper} style={{ minHeight: "580px" }}>
+        <div className={style.seacardwrapper} style={{ minHeight: "580px" }}
+        data-aos="fade-right"
+        data-aos-delay="50"
+        data-aos-easing="ease-in"
+        data-aos-duaration="50"
+        >
             <article className={style.iconholder}>
                 <img src={creature.image_uri} alt="The creature" />
                 <h1>{creature.name["name-USen"].charAt(0).toUpperCase() + creature.name["name-USen"].slice(1)}</h1>

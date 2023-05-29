@@ -123,7 +123,12 @@ const Villagercard = (thevillager) => {
     }
 
     return (
-        <div className={style.villagercard}>
+        <div className={style.villagercard}
+        data-aos="fade-right"
+        data-aos-delay="50"
+        data-aos-easing="ease-in"
+        data-aos-duaration="50"
+        >
             <section>
                 <div className={style.iconholder}>
                 <img src={villager.image_uri} className={style.villagericon} alt="" />

@@ -56,7 +56,12 @@ const BugCard = (bug) => {
 
     return (
 
-        <div className={`${style.seacardwrapper} ${style.bugwrapper}`}>
+        <div className={`${style.seacardwrapper} ${style.bugwrapper}`}
+        data-aos="fade-right"
+        data-aos-delay="50"
+        data-aos-easing="ease-in"
+        data-aos-duaration="50"
+        >
 
             <article className={style.iconholder}>
                 <img src={thebug.image_uri} alt="The thebug" />

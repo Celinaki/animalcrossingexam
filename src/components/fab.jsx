@@ -38,7 +38,8 @@ const Fab = () =>{
         cursor:"pointer",
         display: visible ? 'flex' : 'none'
 
-        }}>
+        }}
+        title="Take me up!">
             <span class="material-symbols-outlined" onClick={scrollToTop} style={{display: visible ? 'inline' : 'none'}}>
             expand_less
             </span>

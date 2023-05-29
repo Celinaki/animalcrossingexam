@@ -129,6 +129,7 @@ const SeacreaturesPage = () => {
         onPageChange={handlePageClick}
         pageRangeDisplayed={3}
         pageCount={pageCount}
+        marginPagesDisplayed={1}
         previousLabel="Previous"
         renderOnZeroPageCount={null}
         containerClassName="pagination"

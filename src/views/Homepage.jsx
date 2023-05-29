@@ -128,14 +128,14 @@ const Home = () => {
       </div>
 
       <ReactPaginate
-        breakLabel=""
+        breakLabel=".."
         breakAriaLabels={{ 
         forward: 'Jump forward 3 steps',
         backward: 'Jump backward 3 steps' 
       }}
-        nextLabel="Next"xD
+        nextLabel="Next"
         onPageChange={handlePageClick}
-        pageRangeDisplayed={2}
+        pageRangeDisplayed={3}
         marginPagesDisplayed={1}
         pageCount={pageCount}
         previousLabel="Previous"

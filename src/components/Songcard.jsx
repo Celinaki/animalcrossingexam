@@ -15,7 +15,12 @@ const Songcard = (song) => {
   return (
     <div className={styles.songcardwrapper}
       onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}>
+      onMouseLeave={() => setHover(false)}
+      data-aos="fade-right"
+      data-aos-delay="50"
+      data-aos-easing="ease-in"
+      data-aos-duaration="50"
+      >
       <section className={styles.imageandplayer}>
         <span className={styles.imageholder}>
           <img
