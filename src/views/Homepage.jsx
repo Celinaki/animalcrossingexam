@@ -56,6 +56,10 @@ const Home = () => {
   const handlePageClick = (event) => {
     const newOffset = event.selected * itemsPerPage;
     setItemOffset(newOffset);
+    window.scrollTo({
+      top: 300,
+      behavior: 'smooth' 
+    });
   };
 
   const onUpdateQuery = (q, data) => {

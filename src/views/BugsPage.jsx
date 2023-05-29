@@ -102,6 +102,10 @@ console.log(theDisplayedList, "bugsdata är här")
   const handlePageClick = (event) =>{
     const newOffset = (event.selected * itemsPerPage) %  theDisplayedList.length;
     setItemOffset(newOffset)
+    window.scrollTo({
+      top: 300,
+      behavior: 'smooth'
+    });
   }
  
 

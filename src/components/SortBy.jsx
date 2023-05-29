@@ -145,7 +145,8 @@ const SortBy = (props) => {
                     const sortedArray = femaleArray.sort((a, b) => a.name["name-USen"].toLowerCase().localeCompare(b.name["name-USen"].toLowerCase()));
                     setPassedArray(sortedArray);
                     return props.onUpdatedFilter(sortedArray);
-                } else if (props.gender === 'Male') {
+                } 
+                else if (props.gender === 'Male') {
                     const maleArray = originalVillagers.filter(villager => villager.gender === 'Male');
                     const sortedArray = maleArray.sort((a, b) => a.name["name-USen"].toLowerCase().localeCompare(b.name["name-USen"].toLowerCase()));
                     setPassedArray(sortedArray);

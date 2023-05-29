@@ -16,14 +16,15 @@ import SortBy from "../components/SortBy";
 import Footer from "../components/Footer";
 
 const SeacreaturesPage = () => {
-  //Todos: Pagination, filtering
   const [searchParams, setSearchParams] = useSearchParams();
-
-  //Array lists
-  //Array lists
-
   const [loadingSpinner, setLoadingSpinner] = useState(false)
   const [theDisplayedList, setTheDisplayedList] = useState([])
+
+  const [query, setQuery] = useState('')
+  const [otherCriteria, setOtherCriteria] = useState(false)
+
+  const [search, setSearch] = useState('')
+  const [searchArray, setSearchArray] = useState([])
 
   useEffect(() => {
     getSeacreatures()
@@ -40,12 +41,7 @@ const SeacreaturesPage = () => {
   }, [])
 
 
-
-
-
   //Query from categories
-  const [query, setQuery] = useState('')
-  const [otherCriteria, setOtherCriteria] = useState(false)
   const onUpdateQuery = (q, data) => {
     setOtherCriteria(true)
     setQuery(q)
@@ -71,8 +67,7 @@ const SeacreaturesPage = () => {
 
   //Query from filter
 
-  const [search, setSearch] = useState('')
-  const [searchArray, setSearchArray] = useState([])
+
   useEffect(() => {
     if (search && typeof search === 'string') {
       setSearchArray(
@@ -87,13 +82,13 @@ const SeacreaturesPage = () => {
     setSearch(e)
   }
 
+
   const [currentItems, setCurrentItems] = useState([])
   const [pageCount, setPageCount] = useState(0)
   const [itemOffset, setItemOffset] = useState(0)
   const itemsPerPage = 16
 
   useEffect(() => {
-
     const endOffset = itemOffset + itemsPerPage;
     setCurrentItems(theDisplayedList.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(theDisplayedList.length / itemsPerPage));
@@ -102,6 +97,10 @@ const SeacreaturesPage = () => {
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % theDisplayedList.length;
     setItemOffset(newOffset)
+    window.scrollTo({
+      top: 300,
+      behavior: 'smooth' 
+    });
   }
 
   return (

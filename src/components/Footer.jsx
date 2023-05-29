@@ -5,14 +5,24 @@ import styles from '../styling/Footer.module.scss';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const scrollUp=()=>{
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth' // Add smooth scrolling behavior
+    });
 
+}
   return (
     <div className={styles.footerWrap}>
       <section className={styles.contentHolder}>
-        <NavLink to="/" className={styles.navLink} activeClassName="">
+        <NavLink 
+     onClick={scrollUp}
+        to="/" className={styles.navLink} activeClassName="">
           Home
         </NavLink>
-        <NavLink to="/about" className={styles.navLink} activeClassName="">
+        <NavLink 
+        onClick={scrollUp}
+        to="/about" className={styles.navLink} activeClassName="">
           About
         </NavLink>
 
