@@ -69,14 +69,15 @@ const Songs = () => {
 
   const [search, setSearch] = useState('')
   const [searchArray, setSearchArray] = useState([])
+
   useEffect(() => {
-    if (search && typeof search === 'string') {
-      setSearchArray(
-        currentItems.filter(item =>
-          item.name["name-USen"].toLowerCase().includes(search.toLowerCase()))
-      )
-    }
-  }, [search, theDisplayedList])
+    const filteredList = theDisplayedList.filter(item =>
+      item.name["name-USen"].toLowerCase().includes(search.toLowerCase())
+    );
+  
+    setSearchArray(search !== '' ? filteredList : []);
+    setItemOffset(0);
+  }, [search, theDisplayedList]);
 
   const searchOnQuery = (e) => {
     console.log(e)
@@ -90,11 +91,11 @@ const Songs = () => {
   const itemsPerPage = 16
 
   useEffect(() => {
-
     const endOffset = itemOffset + itemsPerPage;
-    setCurrentItems(theDisplayedList.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(theDisplayedList.length / itemsPerPage));
-  }, [itemOffset, itemsPerPage, theDisplayedList]);
+    setCurrentItems(search !== '' ? searchArray.slice(itemOffset, endOffset) : theDisplayedList.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil((search !== '' ? searchArray.length : theDisplayedList.length) / itemsPerPage));
+  }, [itemOffset, itemsPerPage, search, searchArray, theDisplayedList]);
+
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % theDisplayedList.length;
