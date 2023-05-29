@@ -39,8 +39,8 @@ const Fab = () =>{
         display: visible ? 'flex' : 'none'
 
         }}
-        title="Take me up!">
-            <span class="material-symbols-outlined" onClick={scrollToTop} style={{display: visible ? 'inline' : 'none'}}>
+        title="Take me up!" onClick={scrollToTop}>
+            <span class="material-symbols-outlined" style={{display: visible ? 'inline' : 'none'}}>
             expand_less
             </span>
         </div>
