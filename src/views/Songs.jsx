@@ -15,16 +15,21 @@ import SearchBar from "../components/Searchbar";
 import ReactPaginate from "react-paginate";
 import globalStyle from '../App.css'
 import Footer from "../components/Footer";
+import Fab from "../components/fab";
 
 const Songs = () => {
-  //Todos: Pagination, filtering
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  //Array lists
-  //Array lists
 
   const [loadingSpinner, setLoadingSpinner] = useState(false)
   const [theDisplayedList, setTheDisplayedList] = useState([])
+
+
+  const [currentItems, setCurrentItems] = useState([])
+  const [pageCount, setPageCount] = useState(0)
+  const [itemOffset, setItemOffset] = useState(0)
+  const itemsPerPage = 16
+
+  const [search, setSearch] = useState('')
+  const [searchArray, setSearchArray] = useState([])
 
   useEffect(() => {
     getSongs()
@@ -38,43 +43,10 @@ const Songs = () => {
     setLoadingSpinner(true)
   }, [])
 
-
-  //Query from categories
-  const [query, setQuery] = useState('')
-  const [otherCriteria, setOtherCriteria] = useState(false)
-  const onUpdateQuery = (q, data) => {
-    // setOtherCriteria(true)
-    // setQuery(q)
-    // setTheDisplayedList(data)
-    // setTimeout(() => {
-    //   setLoadingSpinner(false)
-    // }, 1300)
-    // setLoadingSpinner(true)
-  }
-  //Query from categories
-
-  //Query from filter
-
-  const onUpdateFilter = (data) => {
-    // setOtherCriteria(true)
-    // console.log(data, "här är data från home")
-    setTheDisplayedList(data)
-    setTimeout(() => {
-      setLoadingSpinner(false)
-    }, 1300)
-    setLoadingSpinner(true)
-  }
-
-  //Query from filter
-
-  const [search, setSearch] = useState('')
-  const [searchArray, setSearchArray] = useState([])
-
   useEffect(() => {
     const filteredList = theDisplayedList.filter(item =>
       item.name["name-USen"].toLowerCase().includes(search.toLowerCase())
     );
-  
     setSearchArray(search !== '' ? filteredList : []);
     setItemOffset(0);
   }, [search, theDisplayedList]);
@@ -84,11 +56,6 @@ const Songs = () => {
     setSearch(e)
   }
 
-
-  const [currentItems, setCurrentItems] = useState([])
-  const [pageCount, setPageCount] = useState(0)
-  const [itemOffset, setItemOffset] = useState(0)
-  const itemsPerPage = 16
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
@@ -105,12 +72,14 @@ const Songs = () => {
       behavior: 'smooth'
     });
   }
+
   return (
     <>
       <Navbar />
       <NavWave />
       <section style={{ display: "flex", alignItems: "center" }}>
-        <Categories onChosenCat={onUpdateQuery} />
+        <Categories
+         />
       </section> 
        <SearchBar searchOnQuery={searchOnQuery} />
        {search !== '' ? (
@@ -133,6 +102,7 @@ const Songs = () => {
         ) : (
           currentItems.map(song => <Songcard  key={song.id} song={song} />)
         )}
+        <Fab/>
       </div>
       <ReactPaginate
         breakLabel="..."

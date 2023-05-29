@@ -18,8 +18,6 @@ function App() {
       <Route path="/seacreatures" element={<SeacreaturesPage/>}/>
       <Route path="/villagers" element={<Homepage/>}/>
       <Route path="/about" element={<AboutPage/>}/>
-      {/* <Route path="/villagers/filters/:filterQ" element={<Homepage/>}/>
-      <Route path="/singlevillager" element={<Singlevillager/>}/> */}
     </Routes>
     </Router>
   );

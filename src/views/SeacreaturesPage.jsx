@@ -14,17 +14,22 @@ import ReactPaginate from "react-paginate";
 import globalStyle from '../App.css'
 import SortBy from "../components/SortBy";
 import Footer from "../components/Footer";
+import Fab from "../components/fab";
 
 const SeacreaturesPage = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
   const [loadingSpinner, setLoadingSpinner] = useState(false)
   const [theDisplayedList, setTheDisplayedList] = useState([])
 
   const [query, setQuery] = useState('')
-  const [otherCriteria, setOtherCriteria] = useState(false)
+
 
   const [search, setSearch] = useState('')
   const [searchArray, setSearchArray] = useState([])
+
+  const [currentItems, setCurrentItems] = useState([])
+  const [pageCount, setPageCount] = useState(0)
+  const [itemOffset, setItemOffset] = useState(0)
+  const itemsPerPage = 16
 
   useEffect(() => {
     getSeacreatures()
@@ -42,31 +47,15 @@ const SeacreaturesPage = () => {
 
 
   //Query from categories
-  const onUpdateQuery = (q, data) => {
-    setOtherCriteria(true)
-    setQuery(q)
-    setTheDisplayedList(data)
-    setTimeout(() => {
-      setLoadingSpinner(false)
-    }, 1300)
-    setLoadingSpinner(true)
-  }
-  //Query from categories
-
-  //Query from filter
+  // const onUpdateQuery = (q, data) => {
+  //   setTheDisplayedList(data)
+  //   setSearch('');
+  // }
 
   const onUpdateFilter = (data) => {
-    setOtherCriteria(true)
-    console.log(data, "här är data från home")
     setTheDisplayedList(data)
-    setTimeout(() => {
-      setLoadingSpinner(false)
-    }, 1300)
-    setLoadingSpinner(true)
+    setSearch('');
   }
-
-  //Query from filter
-
 
   useEffect(() => {
     const filteredList = theDisplayedList.filter(item =>
@@ -82,17 +71,6 @@ const SeacreaturesPage = () => {
     setSearch(e)
   }
 
-
-  const [currentItems, setCurrentItems] = useState([])
-  const [pageCount, setPageCount] = useState(0)
-  const [itemOffset, setItemOffset] = useState(0)
-  const itemsPerPage = 16
-
-  // useEffect(() => {
-  //   const endOffset = itemOffset + itemsPerPage;
-  //   setCurrentItems(theDisplayedList.slice(itemOffset, endOffset));
-  //   setPageCount(Math.ceil(theDisplayedList.length / itemsPerPage));
-  // }, [itemOffset, itemsPerPage, theDisplayedList]);
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
@@ -114,11 +92,15 @@ const SeacreaturesPage = () => {
       <Navbar />
       <NavWave />
       <section style={{ display: "flex", alignItems: "center" }}>
-        <Categories onChosenCat={onUpdateQuery} />
+        <Categories 
+      //  onChosenCat={onUpdateQuery}
+         />
       </section>
       <SearchBar searchOnQuery={searchOnQuery} />
       <span className={style.sortingholder}>
-        <SortBy onUpdatedFilter={onUpdateFilter} fromPage={'seaPage'} />
+        <SortBy 
+        onUpdatedFilter={onUpdateFilter}
+         fromPage={'seaPage'} />
       </span>
       {search !== '' ? (
         <>
@@ -139,6 +121,7 @@ const SeacreaturesPage = () => {
         ) : (
           currentItems.map(creature => <SeacreatureCard  key={creature.id} creature={creature} />)
         )}
+        <Fab/>
       </div>
       <ReactPaginate
         breakLabel="..."

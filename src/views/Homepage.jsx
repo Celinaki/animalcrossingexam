@@ -12,6 +12,7 @@ import globalStyle from '../App.css'
 import SortBy from "../components/SortBy";
 import GenderFilter from "../components/Genderfilter";
 import Footer from "../components/Footer";
+import Fab from "../components/fab"
 
 
 const Home = () => {
@@ -62,10 +63,10 @@ const Home = () => {
     });
   };
 
-  const onUpdateQuery = (q, data) => {
-    setTheDisplayedList(data);
-    setSearch('');
-  };
+  // const onUpdateQuery = (q, data) => {
+  //   setTheDisplayedList(data);
+  //   setSearch('');
+  // };
 
   const onUpdateFilter = (data) => {
     setTheDisplayedList(data);
@@ -89,7 +90,9 @@ const Home = () => {
       <Navbar />
       <NavWave />
       <section style={{ display: "flex", alignItems: "center" }}>
-        <Categories onChosenCat={onUpdateQuery} />
+        <Categories
+        //  onChosenCat={onUpdateQuery} 
+         />
       </section>
       <SearchBar searchOnQuery={searchOnQuery} />
       <span className={style.sortingholderhome}>
@@ -121,7 +124,7 @@ const Home = () => {
               <Villagercard key={villager.id} villager={villager} />
             ))}
           </>
-        )}
+        )}  <Fab/>
       </div>
 
       <ReactPaginate
@@ -130,7 +133,7 @@ const Home = () => {
         forward: 'Jump forward 3 steps',
         backward: 'Jump backward 3 steps' 
       }}
-        nextLabel="Next"
+        nextLabel="Next"xD
         onPageChange={handlePageClick}
         pageRangeDisplayed={2}
         marginPagesDisplayed={1}
@@ -145,6 +148,7 @@ const Home = () => {
       />
 
       <Footer />
+    
     </>
   );
 };
