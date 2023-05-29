@@ -69,13 +69,13 @@ const SeacreaturesPage = () => {
 
 
   useEffect(() => {
-    if (search && typeof search === 'string') {
-      setSearchArray(
-        currentItems.filter(item =>
-          item.name["name-USen"].toLowerCase().includes(search.toLowerCase()))
-      )
-    }
-  }, [search, theDisplayedList])
+    const filteredList = theDisplayedList.filter(item =>
+      item.name["name-USen"].toLowerCase().includes(search.toLowerCase())
+    );
+  
+    setSearchArray(search !== '' ? filteredList : []);
+    setItemOffset(0);
+  }, [search, theDisplayedList]);
 
   const searchOnQuery = (e) => {
     console.log(e)
@@ -88,11 +88,17 @@ const SeacreaturesPage = () => {
   const [itemOffset, setItemOffset] = useState(0)
   const itemsPerPage = 16
 
+  // useEffect(() => {
+  //   const endOffset = itemOffset + itemsPerPage;
+  //   setCurrentItems(theDisplayedList.slice(itemOffset, endOffset));
+  //   setPageCount(Math.ceil(theDisplayedList.length / itemsPerPage));
+  // }, [itemOffset, itemsPerPage, theDisplayedList]);
+
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
-    setCurrentItems(theDisplayedList.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(theDisplayedList.length / itemsPerPage));
-  }, [itemOffset, itemsPerPage, theDisplayedList]);
+    setCurrentItems(search !== '' ? searchArray.slice(itemOffset, endOffset) : theDisplayedList.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil((search !== '' ? searchArray.length : theDisplayedList.length) / itemsPerPage));
+  }, [itemOffset, itemsPerPage, search, searchArray, theDisplayedList]);
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % theDisplayedList.length;
@@ -112,15 +118,21 @@ const SeacreaturesPage = () => {
       </section>
       <SearchBar searchOnQuery={searchOnQuery} />
       <span className={style.sortingholder}>
-        <SortBy onUpdatedFilter={onUpdateFilter} fromPage={'bugPage'} />
+        <SortBy onUpdatedFilter={onUpdateFilter} fromPage={'seaPage'} />
       </span>
-      {/* <input type="text" onChange={(e) => setSearch(e.target.value)} /> */}
+      {search !== '' ? (
+        <>
+          <p style={{textAlign:"center", fontFamily:'Poppins', fontSize:"0.9em"}}>
+            Search result for <b>{search}</b>
+          </p>
+        </>
+      ) : '' }
       <div className={style.homewrapper}>
         {loadingSpinner ? (
           <Spinner> </Spinner>
         ) : search !== '' ? (
-          searchArray.length > 0 ? (
-            searchArray.map(creature => <SeacreatureCard   key={creature.id} creature={creature} />)
+          currentItems.length > 0 ? (
+            currentItems.map(creature => <SeacreatureCard   key={creature.id} creature={creature} />)
           ) : (
             <p>No results found for "{search}"</p>
           )

@@ -112,7 +112,13 @@ const Songs = () => {
         <Categories onChosenCat={onUpdateQuery} />
       </section> 
        <SearchBar searchOnQuery={searchOnQuery} />
-
+       {search !== '' ? (
+        <>
+          <p style={{textAlign:"center", fontFamily:'Poppins', fontSize:"0.9em"}}>
+            Search result for <b>{search}</b>
+          </p>
+        </>
+      ) : '' }
       <div className={style.homewrapper}>
 
         {loadingSpinner ? (

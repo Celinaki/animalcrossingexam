@@ -120,6 +120,13 @@ console.log(theDisplayedList, "bugsdata är här")
       <span className={style.sortingholder}>
         <SortBy onUpdatedFilter={onUpdateFilter} fromPage={'bugPage'}/>
       </span>
+      {search !== '' ? (
+        <>
+          <p style={{textAlign:"center", fontFamily:'Poppins', fontSize:"0.9em"}}>
+            Search result for <b>{search}</b>
+          </p>
+        </>
+      ) : '' }
       <div className={style.homewrapper}>
 
         {loadingSpinner ? (

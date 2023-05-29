@@ -18,6 +18,7 @@
 // export default SearchBar
 import React, { useState } from 'react';
 import styles from '../styling/Searchbar.module.scss';
+import { useEffect } from 'react';
 
 const SearchBar = (props) => {
   const [searchValue, setSearchValue] = useState('');
@@ -25,16 +26,20 @@ const SearchBar = (props) => {
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       props.searchOnQuery(searchValue);
+      setSearchValue('')
     }
   };
 
   const handleButtonClick = () => {
     props.searchOnQuery(searchValue);
+    setSearchValue('')
+
   };
 
   const updateState = (val) => {
     setSearchValue(val);
   };
+
 
   return (
     <div className={styles.searchholder}>
