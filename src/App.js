@@ -3,7 +3,6 @@ import {Route, BrowserRouter as Router, Routes} from 'react-router-dom'
 import Homepage from './views/Homepage';
 import BugsPage from './views/BugsPage'
 import Songs from './views/Songs'
-import Singlevillager from './views/Singlevillager';
 import SeacreaturesPage from './views/SeacreaturesPage';
 import Aos from 'aos';
 import AboutPage from './views/About';
