@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Style from '../styling/AudioPlayer.module.scss';
 import { ImPause, ImPlay2 } from "react-icons/im";
-import { useLocation } from 'react-router-dom';
 
 
 
@@ -13,7 +12,7 @@ const AudioPlayer = ({ src, hover }) => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(1);
-  const location = useLocation();
+
 
   useEffect(() => {
     audio.volume = 0.4;
