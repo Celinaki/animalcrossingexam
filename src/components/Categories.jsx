@@ -1,13 +1,10 @@
 import style from '../styling/Categories.module.scss'
 import { NavLink } from 'react-router-dom';
-import { getVillagers } from '../api/villagers';
 import { useState } from 'react';
-import { getSongs } from '../api/songs';
 import { useLocation } from 'react-router-dom';
 
 //{onChosenQuery}
 const Categories = (props) => {
-const [renderedList, setRenderedList] = useState([])
 const location = useLocation()
 
 const fetchChosen = (q) => {
@@ -31,7 +28,7 @@ const fetchChosen = (q) => {
  }
 
  const reloadPage = (path) => {
-  if (window.location.pathname === path || window.location.pathname === '/') {
+  if (window.location.pathname === path ) {
     window.location.reload();
   } else {
     window.location.href = path;
@@ -41,10 +38,10 @@ const fetchChosen = (q) => {
     return (
         <div className={style.categorieswrap}>
 <ul className={style.listitems}>
-   <NavLink to={`/villagers`}
+   <NavLink to={`/`}
       style={({ isActive }) => ({ background: isActive ? 'rgb(222 184 135 / 61%)' : '' })}>
      <li 
-     onClick={()=>{fetchChosen('villagers'); reloadPage('/villagers')}}>
+     onClick={()=>{fetchChosen('villagers'); reloadPage('/')}}>
         - VILLAGERS -
     </li>
     </NavLink>

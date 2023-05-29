@@ -63,10 +63,10 @@ const Home = () => {
     });
   };
 
-  // const onUpdateQuery = (q, data) => {
-  //   setTheDisplayedList(data);
-  //   setSearch('');
-  // };
+  const onUpdateQuery = (q, data) => {
+    setTheDisplayedList(data);
+    setSearch('');
+  };
 
   const onUpdateFilter = (data) => {
     setTheDisplayedList(data);
@@ -91,7 +91,7 @@ const Home = () => {
       <NavWave />
       <section style={{ display: "flex", alignItems: "center" }}>
         <Categories
-        //  onChosenCat={onUpdateQuery} 
+         onChosenCat={onUpdateQuery} 
          />
       </section>
       <SearchBar searchOnQuery={searchOnQuery} />
