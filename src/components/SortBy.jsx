@@ -57,6 +57,8 @@ const SortBy = (props) => {
         }
     }, [originalVillagers,])
     const [passedArray, setPassedArray] = useState([])
+
+    
     const setFilteredArray = (q) => {
 
         if (props.fromPage == 'seaPage') {
@@ -160,7 +162,7 @@ const SortBy = (props) => {
                 else {
                     const sortedArray = [...originalVillagers].sort((a, b) => a.name["name-USen"].toLowerCase().localeCompare(b.name["name-USen"].toLowerCase()));
                     setPassedArray(sortedArray);
-                    setSelected('Sort by')
+                    setSelected('Alphabetical')
                     return props.onUpdatedFilter(sortedArray);
                 }
             }
@@ -181,7 +183,7 @@ const SortBy = (props) => {
                     return props.onUpdatedFilter(originalVillagers);
                 }
             } else {
-                // Handle other cases or fallback logic
+               
             }
         }
 
