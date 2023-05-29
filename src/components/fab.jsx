@@ -23,7 +23,7 @@ const Fab = () =>{
     
     window.addEventListener('scroll', toggleVisible);
     return(
-        <div style={{background:"#22212120",
+        <div style={{background:"#00000011",
         display:"flex",
         justifyContent:"center",
         alignItems:"center",
@@ -31,7 +31,7 @@ const Fab = () =>{
         width:"50px",
         height:"50px",
         position:"sticky",
-        bottom:"0",
+        bottom:"20px",
         top:"100",
         right:"0",
         left:"100%",
