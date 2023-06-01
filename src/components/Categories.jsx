@@ -54,7 +54,7 @@ const fetchChosen = (q) => {
     <NavLink to={`/seacreatures`}
       style={({ isActive }) => ({ background: isActive ? 'rgb(222 184 135 / 61%)' : '' })}>
     <li onClick={()=>{fetchChosen('seacreatures'); reloadPage('/seacreatures')}}>
-        - SEARCREATURES -
+        - SEACREATURES -
     </li>
     </NavLink>
     <NavLink to={`/bugs`}
