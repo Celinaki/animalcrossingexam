@@ -103,8 +103,8 @@ const SortBy = (props) => {
         else if (props.fromPage == 'bugPage') {
             if (q === 'Alph') {
                 const sortedArray = [...originalBug].sort((a, b) => {
-                    const nameA = a.name["name-USen"].toLowerCase();
-                    const nameB = b.name["name-USen"].toLowerCase();
+                    const nameA = a.name.toLowerCase();
+                    const nameB = b.name.toLowerCase();
                     if (nameA < nameB) {
                         return -1;
                     }
@@ -119,14 +119,14 @@ const SortBy = (props) => {
             }
             else if (q === 'Hp') {
                 const sortedArray = [...originalBug].sort((a, b) => {
-                    return b['price'] - a['price'];
+                    return b.sell_nook - a.sell_nook;
                 });
                 setPassedArray(sortedArray)
                 return props.onUpdatedFilter(passedArray)
             }
             else if (q === 'Lp') {
                 const sortedArray = [...originalBug].sort((a, b) => {
-                    return a['price'] - b['price'];
+                    return a.sell_nook - b.sell_nook;
                 });
                 setPassedArray(sortedArray)
                 return props.onUpdatedFilter(passedArray)
