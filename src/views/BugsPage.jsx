@@ -55,9 +55,20 @@ const Home = () => {
   }
   //Query from filter
 
-  useEffect(() => {
+  //ORIGINAL
+  // useEffect(() => {
+  //   const filteredList = theDisplayedList.filter(item =>
+  //     item.name["name-USen"].toLowerCase().includes(search.toLowerCase())
+  //   );
+
+  //   setSearchArray(search !== '' ? filteredList : []);
+  //   setItemOffset(0);
+  // }, [search, theDisplayedList]);
+  //ORIGINAL
+
+    useEffect(() => {
     const filteredList = theDisplayedList.filter(item =>
-      item.name["name-USen"].toLowerCase().includes(search.toLowerCase())
+      item.name.toLowerCase().includes(search.toLowerCase())
     );
 
     setSearchArray(search !== '' ? filteredList : []);

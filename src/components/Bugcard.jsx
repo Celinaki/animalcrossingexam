@@ -16,24 +16,56 @@ import "aos/dist/aos.css";
 
 
 const BugCard = (bug) => {
-    const thebug = bug.bug;
-    const [allMonths, setAllMonths] = useState(false)
+     const thebug = bug.bug;
+     const [allMonths, setAllMonths] = useState(false)
 
-    const getTime = (time) => {
-        if (time === null || time === "") {
+     useEffect(()=>{
+       console.log(thebug.north.months)
+     })
+
+    //ORIGINAL
+    // const getTime = (time) => {
+    //     if (time === null || time === "") {
+    //         return <h2>It's available all hours of the day</h2>
+    //     }
+    //     else {
+    //         return <h2>It's available during {time}</h2>
+    //     }
+    // }
+    //ORIGINAL
+
+        const getTime = (time) => {
+        if ( time[0].time == "All day") {
             return <h2>It's available all hours of the day</h2>
         }
         else {
-            return <h2>It's available during {time}</h2>
+            return <h2>It's available during {time[0].time}</h2>
         }
     }
-
+//ORINAL
+    // const getMonths = (sMonths, nMonths) => {
+    //     if (sMonths === null || sMonths === "") {
+    //         return ''
+    //     }
+    //     else {
+    //         return <>
+    //             <span>
+    //                 <img src={NorthIcon} alt="" /><h2>{nMonths}</h2>
+    //             </span>
+    //             <span>
+    //                 <img src={SouthIcon} alt="" /><h2>{sMonths}</h2>
+    //             </span>
+    //         </>
+    //     }
+    // }
+    //ORIGINAL
+    
     const getMonths = (sMonths, nMonths) => {
-        if (sMonths === null || sMonths === "") {
+        if (sMonths == "All year" || sMonths === "All year") {
+            console.log(nMonths,  "här är north m")
             return ''
         }
         else {
-
             return <>
                 <span>
                     <img src={NorthIcon} alt="" /><h2>{nMonths}</h2>
@@ -46,10 +78,10 @@ const BugCard = (bug) => {
     }
 
     useEffect(() => {
-        if (thebug.availability["month-southern"] === null || thebug.availability["month-southern"] === "") {
+        if (thebug.south.months == "All year" ) {
             setAllMonths(true)
         }
-    }, [thebug.availability["month-southern"]])
+    }, [thebug.south.month])
 
     const [showMore, setShowMore] = useState(false)
     const [isFlipped, setIsFlipped] = useState(false)
@@ -57,49 +89,80 @@ const BugCard = (bug) => {
     return (
 
         <div className={`${style.seacardwrapper} ${style.bugwrapper}`}
-        data-aos="fade-right"
-        data-aos-delay="50"
-        data-aos-easing="ease-in"
-        data-aos-duaration="50"
+            data-aos="fade-right"
+            data-aos-delay="50"
+            data-aos-easing="ease-in"
+            data-aos-duaration="50"
         >
 
-            <article className={style.iconholder}>
-                <img src={thebug.image_uri} alt="The thebug" />
-                <h1>{thebug.name["name-USen"].charAt(0).toUpperCase() + thebug.name["name-USen"].slice(1)}</h1>
+           <article className={style.iconholder}>
+                <img src={thebug.image_url} alt="The thebug" />
+                <h1>{thebug.name.charAt(0).toUpperCase() + thebug.name.slice(1)}</h1>
 
             </article>
-            <span className={`${style.flexed}`}>
-            <span class="material-symbols-outlined">
-                    schedule
-                </span>                {getTime(thebug.availability["time"])}
-            </span>
-            <section className={style.monthsAndIcons}>
+            
+             
+              {/* <span className={`${style.flexed}`}>
+                     <span class="material-symbols-outlined">
+                         schedule
+                     </span>     
+                     {getTime(thebug.availability["time"])}
+             </span> */}
+
                 <span className={`${style.flexed}`}>
-                <span class="material-symbols-outlined">
+                    <span class="material-symbols-outlined">
+                        schedule
+                    </span>     
+                    {getTime(thebug.north.availability_array)}
+                </span>
+{/* 
+        
+          <section className={style.monthsAndIcons}>
+                <span className={`${style.flexed}`}>
+                    <span class="material-symbols-outlined">
                         calendar_today
                     </span>                    {
                         allMonths ? <h2>It's available all months of the year</h2> :
                             <h2>Available during these months</h2>
-
                     }
                 </span>
                 <span className={style.months}>
                     {getMonths(thebug.availability["month-southern"], thebug.availability["month-northern"])}
                 </span>
+            </section> */}
+
+<section className={style.monthsAndIcons}>
+                <span className={`${style.flexed}`}>
+                    <span class="material-symbols-outlined">
+                        calendar_today
+                    </span> 
+                    {
+                        allMonths ?
+                        <h2>It's available all months of the year</h2> 
+                        :
+                        <h2>Available during these months</h2>
+                    }
+                </span>
+                <span className={style.months}>
+                    {getMonths(thebug.south.months, thebug.north.months)}
+                </span>
             </section>
-            <span className={style.flexed}>
-            <span class="material-symbols-outlined">
+
+               <span className={style.flexed}>
+                <span class="material-symbols-outlined">
                     monetization_on
-                </span>                <h2>It goes for {thebug.price}  </h2>
-                <img src={checkPrice(thebug.price)} alt="" />
+                </span>       
+            <h2>It goes for {thebug.sell_nook}  </h2>
+                <img src={checkPrice(thebug.sell_nook)} alt="" />
             </span>
             <span className={style.flexed}>
-            <span class="material-symbols-outlined">
+                <span class="material-symbols-outlined">
                     monetization_on
-                </span>                <h2>Sells for {thebug["price-flick"]} <img src={checkPrice(thebug.price)} alt="" />at Flicks  </h2>
-                
+                </span>                <h2>Sells for {thebug.sell_flick} <img src={checkPrice(thebug.sell_flick)} alt="" />at Flicks  </h2>
+
             </span>
-            {
+        
+          {
                 showMore === true ?
                     <div className={style.back}
                         data-aos="fade-right"
@@ -112,22 +175,21 @@ const BugCard = (bug) => {
                             data-aos="fade-right"
                             data-aos-delay="100"
                             data-aos-easing="ease-in"
-                            data-aos-duaration="100"> 
-  <span class="material-symbols-outlined">
+                            data-aos-duaration="100">
+                            <span class="material-symbols-outlined">
                                 campaign
-                            </span>                     
-                                 <h2>Catchphrase: "{thebug["catch-phrase"]}"</h2>
                             </span>
-                        <span className={style.flexed}
+                            <h2>Catchphrase: "{thebug.catchphrases[0]}"</h2>
+                        </span>
+                        {/* <span className={style.flexed}
                             data-aos="fade-right"
                             data-aos-delay="200"
                             data-aos-easing="ease-in"
                             data-aos-duaration="100">
-                                <img src={OwlIcon} alt="" />
-                                <h2>Museumphrase: {thebug["museum-phrase"]}</h2> 
-                                </span>
+                            <img src={OwlIcon} alt="" />
+                            <h2>Museumphrase: {thebug["museum-phrase"]}</h2>
+                        </span> */}
                     </div>
-
                     :
                     ''
             }
@@ -139,9 +201,6 @@ const BugCard = (bug) => {
                 <span></span>
                 <span></span>
             </button>
-
-
-
         </div>
     )
 }
