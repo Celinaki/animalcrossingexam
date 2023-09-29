@@ -16,12 +16,13 @@ import ReactPaginate from "react-paginate";
 import globalStyle from '../App.css'
 import Footer from "../components/Footer";
 import Fab from "../components/fab";
+import singleSong from "../assets/mjk_China.mp3"
+import singleCover from "../assets/mjk_China.png"
 
 const Songs = () => {
 
   const [loadingSpinner, setLoadingSpinner] = useState(false)
   const [theDisplayedList, setTheDisplayedList] = useState([])
-
 
   const [currentItems, setCurrentItems] = useState([])
   const [pageCount, setPageCount] = useState(0)
@@ -31,12 +32,45 @@ const Songs = () => {
   const [search, setSearch] = useState('')
   const [searchArray, setSearchArray] = useState([])
 
+  const theSong= [
+     {
+      "id": 14,
+      "file-name": "mjk_China",
+      "name": {
+        "name-USen": "Imperial K.K.",
+      },
+      "buy-price": 3200,
+      "sell-price": 800,
+      "isOrderable": true,
+      "music_uri": singleSong,
+      "image_uri":singleCover
+    }
+  ]
+
+  // useEffect(() => {
+  //   getSongs()
+  //     .then((songData) => {
+  //       setTheDisplayedList(songData)
+  //       console.log(theDisplayedList)
+  //     })
+  //   setTimeout(() => {
+  //     setLoadingSpinner(false)
+  //   }, 1300)
+  //   setLoadingSpinner(true)
+  // }, [])
+
+  // useEffect(() => {
+  //   const filteredList = theDisplayedList.filter(item =>
+  //     item.name["name-USen"].toLowerCase().includes(search.toLowerCase())
+  //   );
+  //   setSearchArray(search !== '' ? filteredList : []);
+  //   setItemOffset(0);
+  // }, [search, theDisplayedList]);
+
+  
   useEffect(() => {
-    getSongs()
-      .then((songData) => {
-        setTheDisplayedList(songData)
+        setTheDisplayedList(theSong)
         console.log(theDisplayedList)
-      })
     setTimeout(() => {
       setLoadingSpinner(false)
     }, 1300)
