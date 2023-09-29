@@ -37,13 +37,14 @@
     .iconholder{
       
         width: 45%;
-        height: 50%;
+        max-height: 10rem;
         align-self: center;
             .villagericon{
                 border-radius: 15%;
-                border: 5px solid #D78A46;
-       width: 100%;
-       height: 100%;
+                //border: 5px solid #D78A46;
+            width: 100%;
+            height:10rem;
+            object-fit: contain;
     //    border-radius: 15%;
         // transform: translateY(-30%);
     } 
@@ -58,11 +59,12 @@
     h2{
         font-size: 1rem;
     }
-    img{
-            height: 1.3rem;
-            margin: 0;
-            padding: 0;
-        }
+    // img{
+    //         max-height: 1.3rem;
+    //         min-height: 1.3rem;
+    //         margin: 0;
+    //         padding: 0;
+    //     }
     }       
     }
 
