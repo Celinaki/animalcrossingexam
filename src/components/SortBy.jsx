@@ -137,24 +137,24 @@ const SortBy = (props) => {
             }
 
         }
-        else if (props.fromPage === 'villagerPage') {
 
+        else if (props.fromPage === 'villagerPage') {
             if (q === 'Alph') {
                 if (props.gender === 'Female') {
                     const femaleArray = originalVillagers.filter(villager => villager.gender === 'Female');
-                    const sortedArray = femaleArray.sort((a, b) => a.name["name-USen"].toLowerCase().localeCompare(b.name["name-USen"].toLowerCase()));
+                    const sortedArray = femaleArray.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
                     setPassedArray(sortedArray);
                     return props.onUpdatedFilter(sortedArray);
                 }
                 else if (props.gender === 'Male') {
                     const maleArray = originalVillagers.filter(villager => villager.gender === 'Male');
-                    const sortedArray = maleArray.sort((a, b) => a.name["name-USen"].toLowerCase().localeCompare(b.name["name-USen"].toLowerCase()));
+                    const sortedArray = maleArray.sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
                     setPassedArray(sortedArray);
                     return props.onUpdatedFilter(sortedArray);
                 }
 
                 else if (props.gender === 'Reset') {
-                    const sortedArray = [...originalVillagers].sort((a, b) => a.name["name-USen"].toLowerCase().localeCompare(b.name["name-USen"].toLowerCase()));
+                    const sortedArray = [...originalVillagers].sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
                     setPassedArray(sortedArray);
                     setSelected('Sort by')
 
@@ -164,7 +164,7 @@ const SortBy = (props) => {
                     setSelected('Sort by')
                 }
                 else {
-                    const sortedArray = [...originalVillagers].sort((a, b) => a.name["name-USen"].toLowerCase().localeCompare(b.name["name-USen"].toLowerCase()));
+                    const sortedArray = [...originalVillagers].sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
                     setPassedArray(sortedArray);
                     setSelected('Alphabetical')
                     return props.onUpdatedFilter(sortedArray);
@@ -172,55 +172,103 @@ const SortBy = (props) => {
 
             }
 
+            // else if (q === 'Birthday') {
+            //     if (props.gender === 'Female') {
+            //         const femaleArray = originalVillagers.filter(villager => villager.gender === 'Female');
+            //         const sortedArray = femaleArray.sort((a, b) => {
+            //             const [aDay, aMonth] = a.birthday.split('/');
+            //             const [bDay, bMonth] = b.birthday.split('/');
+
+            //             if (aMonth !== bMonth) {
+            //                 return aMonth - bMonth;
+            //             }
+
+            //             return aDay - bDay;
+            //         });
+            //         setPassedArray(sortedArray);
+            //         return props.onUpdatedFilter(sortedArray);
+            //     }
+            //     else if (props.gender === 'Male') {
+            //         const maleArray = originalVillagers.filter(villager => villager.gender === 'Male');
+            //         const sortedArray = maleArray.sort((a, b) => {
+            //             const [aDay, aMonth] = a.birthday.split('/');
+            //             const [bDay, bMonth] = b.birthday.split('/');
+
+            //             if (aMonth !== bMonth) {
+            //                 return aMonth - bMonth;
+            //             }
+
+            //             return aDay - bDay;
+            //         });
+            //         setPassedArray(sortedArray);
+            //         return props.onUpdatedFilter(sortedArray);
+            //     }
+            //     else if (props.gender === 'Reset') {
+            //         setSelected('Sort by')
+            //     }
+            //     else {
+            //         const sortedArray = originalVillagers.sort((a, b) => {
+            //             const [aDay, aMonth] = a.birthday.split('/');
+            //             const [bDay, bMonth] = b.birthday.split('/');
+
+            //             if (aMonth !== bMonth) {
+            //                 return aMonth - bMonth;
+            //             }
+
+            //             return aDay - bDay;
+            //         });
+            //         setPassedArray(sortedArray);
+            //         return props.onUpdatedFilter(sortedArray);
+            //     }
+            // }
+
             else if (q === 'Birthday') {
+                let sortedArray = [];
+              
                 if (props.gender === 'Female') {
-                    const femaleArray = originalVillagers.filter(villager => villager.gender === 'Female');
-                    const sortedArray = femaleArray.sort((a, b) => {
-                        const [aDay, aMonth] = a.birthday.split('/');
-                        const [bDay, bMonth] = b.birthday.split('/');
-
-                        if (aMonth !== bMonth) {
-                            return aMonth - bMonth;
-                        }
-
-                        return aDay - bDay;
-                    });
-                    setPassedArray(sortedArray);
-                    return props.onUpdatedFilter(sortedArray);
+                  const femaleArray = originalVillagers.filter(villager => villager.gender === 'Female');
+                  sortedArray = femaleArray.sort((a, b) => compareBirthdays(a, b));
                 }
                 else if (props.gender === 'Male') {
-                    const maleArray = originalVillagers.filter(villager => villager.gender === 'Male');
-                    const sortedArray = maleArray.sort((a, b) => {
-                        const [aDay, aMonth] = a.birthday.split('/');
-                        const [bDay, bMonth] = b.birthday.split('/');
-
-                        if (aMonth !== bMonth) {
-                            return aMonth - bMonth;
-                        }
-
-                        return aDay - bDay;
-                    });
-                    setPassedArray(sortedArray);
-                    return props.onUpdatedFilter(sortedArray);
+                  const maleArray = originalVillagers.filter(villager => villager.gender === 'Male');
+                  sortedArray = maleArray.sort((a, b) => compareBirthdays(a, b));
                 }
                 else if (props.gender === 'Reset') {
-                    setSelected('Sort by')
+                  setSelected('Sort by');
+                  sortedArray = originalVillagers;
                 }
                 else {
-                    const sortedArray = originalVillagers.sort((a, b) => {
-                        const [aDay, aMonth] = a.birthday.split('/');
-                        const [bDay, bMonth] = b.birthday.split('/');
-
-                        if (aMonth !== bMonth) {
-                            return aMonth - bMonth;
-                        }
-
-                        return aDay - bDay;
-                    });
-                    setPassedArray(sortedArray);
-                    return props.onUpdatedFilter(sortedArray);
+                  sortedArray = originalVillagers.sort((a, b) => compareBirthdays(a, b));
                 }
-            }
+                   function compareBirthdays(a, b) {
+                const aMonth = getMonthNumber(a.birthday_month);
+                const bMonth = getMonthNumber(b.birthday_month);
+                const aDay = parseInt(a.birthday_day);
+                const bDay = parseInt(b.birthday_day);
+              
+                if (aMonth !== bMonth) {
+                  return aMonth - bMonth;
+                }
+              
+                return aDay - bDay;
+              }
+              
+              // Function to convert month name to number
+              function getMonthNumber(monthName) {
+                const months = [
+                  'January', 'February', 'March', 'April', 'May', 'June',
+                  'July', 'August', 'September', 'October', 'November', 'December'
+                ];
+                return months.indexOf(monthName) + 1;
+              }
+                setPassedArray(sortedArray);
+                return props.onUpdatedFilter(sortedArray);
+              }
+              
+              // Function to compare birthdays
+         
+
+            
 
             else if (q === 'Reset') {
                 if (props.gender === 'Female') {

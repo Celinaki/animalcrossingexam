@@ -30,7 +30,7 @@ const Home = () => {
   useEffect(() => {
     if (search !== '') {
       setSearchArray(theDisplayedList.filter(item =>
-        item.name["name-USen"].toLowerCase().includes(search.toLowerCase())
+        item.name.toLowerCase().includes(search.toLowerCase())
       ));
     } else {
       setSearchArray([]);
