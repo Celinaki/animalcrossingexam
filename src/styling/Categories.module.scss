@@ -9,8 +9,10 @@
         padding: 2rem 0rem;
 
         font-weight: bolder;
-        flex-direction: column;
+       // flex-direction: column;
         align-items: center;
+        overflow: scroll;
+        gap: 1rem;
         a{
             color: inherit;
             text-decoration: none;

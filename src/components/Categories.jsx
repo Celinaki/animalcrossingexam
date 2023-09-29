@@ -42,25 +42,25 @@ const fetchChosen = (q) => {
       style={({ isActive }) => ({ background: isActive ? 'rgb(222 184 135 / 61%)' : '' })}>
      <li 
      onClick={()=>{fetchChosen('villagers'); reloadPage('/')}}>
-        - VILLAGERS -
+         VILLAGERS 
     </li>
     </NavLink>
     <NavLink to={`/songs`}
       style={({ isActive }) => ({ background: isActive ? 'rgb(222 184 135 / 61%)' : '' })}>
     <li onClick={()=>{fetchChosen('songs'); reloadPage('/songs')}}>
-        - SONGS -
+         SONGS 
     </li>    
     </NavLink>
     <NavLink to={`/seacreatures`}
       style={({ isActive }) => ({ background: isActive ? 'rgb(222 184 135 / 61%)' : '' })}>
     <li onClick={()=>{fetchChosen('seacreatures'); reloadPage('/seacreatures')}}>
-        - SEACREATURES -
+         SEACREATURES 
     </li>
     </NavLink>
     <NavLink to={`/bugs`}
       style={({ isActive }) => ({ background: isActive ? 'rgb(222 184 135 / 61%)' : '' })}>
     <li onClick={()=>{fetchChosen('bugs'); reloadPage('/bugs')}}>
-        - BUGS -
+         BUGS 
     </li>
     </NavLink>
 </ul>
